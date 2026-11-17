@@ -70,7 +70,7 @@ Every image is an `ImageAsset` (`src`, `alt`, optional `position` for `object-po
 
 ## Deployment (GitHub Pages)
 
-The site is a **static export** (`output: "export"` in `next.config.ts`), so it runs on any static host. Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds with `NEXT_PUBLIC_BASE_PATH=/<repo>` and publishes the `out/` folder to GitHub Pages. For a custom domain or a `<user>.github.io` repository the base path is left empty automatically.
+The site is a **static export** (`output: "export"` in `next.config.ts`), so it runs on any static host. Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with `NEXT_PUBLIC_BASE_PATH=/<repo>` and publishes the `out/` folder to GitHub Pages. For a custom domain or a `<user>.github.io` repository the base path is left empty automatically.
 
 Live: https://atharvakun.github.io/rj/
 
