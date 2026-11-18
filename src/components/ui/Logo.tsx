@@ -1,25 +1,15 @@
 import Image from "next/image";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
+import { ArchOutline } from "./ArchDefs";
 import { TransitionLink } from "./TransitionLink";
 
 /**
- * Brand mark — three overlapping rings: people, place, moment.
- * Replace with the final mark, or set `site.logo.src` to use an image instead.
+ * Brand mark — a cusped Rajput arch within an arch: the gateway motif that
+ * opens the site. Replace with the final mark, or set `site.logo.src`.
  */
 export function Mark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 40 24"
-      fill="none"
-      aria-hidden
-      className={cn("h-5 w-auto", className)}
-    >
-      <circle cx="12" cy="12" r="10.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="20" cy="12" r="10.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="28" cy="12" r="10.5" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
+  return <ArchOutline className={cn("h-6 w-6", className)} strokeWidth={1.5} />;
 }
 
 export function Wordmark({ className }: { className?: string }) {
@@ -38,7 +28,7 @@ export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <Mark />
-      <span className="font-display text-[1.45rem] leading-none tracking-[-0.02em]">
+      <span className="font-display whitespace-nowrap text-[1rem] leading-none tracking-[-0.01em] sm:text-[1.15rem]">
         {site.wordmark}
       </span>
     </span>

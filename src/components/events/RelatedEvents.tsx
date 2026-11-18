@@ -14,7 +14,7 @@ export function RelatedEvents({
   next: EventRecord | null;
 }) {
   return (
-    <section className="theme-stage border-t border-smoke" aria-label="Related experiences">
+    <section className="theme-stage border-t border-smoke" aria-label="Related events">
       {related.length > 0 && (
         <div className="container-x py-24 md:py-36">
           <div className="flex items-end justify-between">
@@ -24,8 +24,8 @@ export function RelatedEvents({
                 More like this
               </TextReveal>
             </div>
-            <TransitionLink href="/events" className="group hidden items-center gap-2 text-sm md:inline-flex">
-              <span className="link-line">All experiences</span>
+            <TransitionLink href="/#events" className="group hidden items-center gap-2 text-sm md:inline-flex">
+              <span className="link-line">All events</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-1" strokeWidth={1.75} />
             </TransitionLink>
           </div>
@@ -50,7 +50,7 @@ export function RelatedEvents({
             <div className="absolute inset-0 bg-ink/55 transition-colors duration-700 group-hover:bg-ink/40" />
           </RevealImage>
           <div className="container-x absolute inset-0 flex flex-col justify-between py-10 text-bone">
-            <span className="eyebrow">Next experience</span>
+            <span className="eyebrow">Next event</span>
             <div className="flex items-end justify-between gap-6">
               <span className="font-display text-display-lg text-balance transition-transform duration-700 ease-out-expo group-hover:translate-x-3">
                 {next.title}

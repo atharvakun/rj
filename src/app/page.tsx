@@ -1,11 +1,16 @@
 import { getPastEvents, getUpcomingEvents } from "@/content";
 import { Hero } from "@/components/home/Hero";
-import { NextUp } from "@/components/home/NextUp";
-import { Statement } from "@/components/home/Statement";
-import { Directory } from "@/components/home/Directory";
+import { PhotoStrip } from "@/components/home/PhotoStrip";
+import { About } from "@/components/home/About";
+import { UpcomingEvent } from "@/components/home/UpcomingEvent";
+import { Awards } from "@/components/home/Awards";
+import { Contact } from "@/components/home/Contact";
 
-/** Upcoming / past is decided at build time (static export); redeploy to refresh it. */
-
+/**
+ * The whole site on one page: hero, where we come from, about (with the
+ * team), upcoming events, the awards, contact. Upcoming / past is decided at
+ * build time (static export); redeploy to refresh it.
+ */
 export default function HomePage() {
   const upcoming = getUpcomingEvents();
   const past = getPastEvents();
@@ -13,9 +18,11 @@ export default function HomePage() {
   return (
     <>
       <Hero next={upcoming[0] ?? null} />
-      <NextUp event={upcoming[0] ?? null} fallback={past[0] ?? null} />
-      <Statement />
-      <Directory />
+      <PhotoStrip />
+      <About />
+      <UpcomingEvent events={upcoming} fallback={past[0] ?? null} />
+      <Awards />
+      <Contact />
     </>
   );
 }

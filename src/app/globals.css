@@ -3,7 +3,8 @@
 /* ------------------------------------------------------------------------
    DESIGN TOKENS
    Direction: "Cinematic Editorial" — a warm near-black stage, bone-coloured
-   editorial interludes, one hot accent (ember) and one quiet metallic (gold).
+   editorial interludes, one hot accent (ember, a kesariya saffron) and one
+   quiet metallic (gold).
    Change these to rebrand; components only reference the token names.
    ------------------------------------------------------------------------ */
 :root {
@@ -14,8 +15,8 @@
   --color-bone: #f3ede3;       /* editorial paper */
   --color-sand: #e5dccc;       /* raised surfaces on paper */
   --color-clay: #6b625a;       /* secondary text on paper */
-  --color-ember: #e4552b;      /* accent */
-  --color-ember-deep: #b53d1a;
+  --color-ember: #ec8a2f;      /* accent: kesariya (saffron) */
+  --color-ember-deep: #c0631a;
   --color-gold: #d4a24c;       /* quiet metallic accent */
   --color-white: #fbf8f2;
 
@@ -45,6 +46,7 @@
   --font-display: var(--font-display), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-devanagari: var(--font-devanagari), "Noto Serif Devanagari", "Nirmala UI", "Kohinoor Devanagari", serif;
 
   --ease-out-expo: var(--ease-out-expo);
   --ease-in-out-quart: var(--ease-in-out-quart);
@@ -200,6 +202,16 @@ html.js [data-reveal]:not(.is-ready) {
   visibility: hidden;
 }
 
+/* Slow rotation for the award seal */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Marquee */
 @keyframes marquee {
   from {
@@ -214,6 +226,9 @@ html.js [data-reveal]:not(.is-ready) {
 }
 .marquee:hover .marquee-track {
   animation-play-state: paused;
+}
+.marquee-reverse .marquee-track {
+  animation-direction: reverse;
 }
 
 /* Hero scroll hint + testimonial autoplay progress */

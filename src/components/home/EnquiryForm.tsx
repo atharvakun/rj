@@ -16,6 +16,8 @@ const ENDPOINT = process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT;
 type Status = "idle" | "sending" | "sent" | "error";
 type Errors = Partial<Record<"name" | "email" | "message", string>>;
 
+const purposeLabel = (value: string) => home.contact.purposes.find((p) => p.value === value)?.label ?? value;
+
 export function EnquiryForm() {
   const params = useSearchParams();
   const [status, setStatus] = useState<Status>("idle");
@@ -24,23 +26,35 @@ export function EnquiryForm() {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    organisation: "",
-    type: "",
-    date: "",
+    phone: "",
+    city: "",
+    purpose: "",
     message: "",
     website: "", // honeypot
   });
 
-  // Prefill when arriving from an event's "Register interest" button.
+  // Prefill from the URL: `?purpose=nomination` from the awards links,
+  // `?event=slug` from an event's "Register interest" button.
+  const purposeParam = params.get("purpose");
+  const eventParam = params.get("event");
   useEffect(() => {
-    const slug = params.get("event");
-    if (!slug) return;
-    const ev = getEventBySlug(slug);
-    if (!ev) return;
-    // Prefill from the URL once; the message is deliberately not a dependency.
+    const ev = eventParam ? getEventBySlug(eventParam) : null;
+    const purpose = ev ? "event" : purposeParam && home.contact.purposes.some((p) => p.value === purposeParam) ? purposeParam : "";
+    if (!purpose) return;
+    // Prefill once; a message the visitor has already typed is left alone.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setValues((v) => (v.message ? v : { ...v, message: `I would like to register interest in ${ev.title} (${ev.venue.city}).\n\n` }));
-  }, [params]);
+    setValues((v) => ({
+      ...v,
+      purpose: v.purpose || purpose,
+      message: v.message
+        ? v.message
+        : ev
+          ? `I would like to attend ${ev.title} (${ev.venue.city}). Please keep me posted.\n\n`
+          : purpose === "nomination"
+            ? home.contact.nominationTemplate
+            : "",
+    }));
+  }, [purposeParam, eventParam]);
 
   const set = (k: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setValues((v) => ({ ...v, [k]: e.target.value }));
@@ -49,7 +63,7 @@ export function EnquiryForm() {
     const next: Errors = {};
     if (values.name.trim().length < 2) next.name = "Please tell us your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) next.email = "Please enter a valid email address.";
-    if (values.message.trim().length < 10) next.message = "A sentence or two helps us reply well.";
+    if (values.message.replace(/_/g, "").trim().length < 10) next.message = "A sentence or two helps us reply well.";
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -69,26 +83,26 @@ export function EnquiryForm() {
         const res = await fetch(ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ ...values, eventSlug: params.get("event") ?? undefined, source: site.name }),
+          body: JSON.stringify({ ...values, purposeLabel: purposeLabel(values.purpose), eventSlug: eventParam ?? undefined, source: site.name }),
         });
-        if (!res.ok) throw new Error("The form service did not accept the enquiry. Please email us directly.");
+        if (!res.ok) throw new Error("The form service did not accept the message. Please email us directly.");
         setServerMessage("");
         setStatus("sent");
         return;
       }
-      // Static hosting with no endpoint configured: hand the drafted enquiry to the visitor's email app.
-      const subject = `Enquiry from ${values.name}${values.type ? ` — ${values.type}` : ""}`;
+      // Static hosting with no endpoint configured: hand the drafted message to the visitor's email app.
+      const subject = `${values.purpose ? purposeLabel(values.purpose) : "Message"} — ${values.name}`;
       const lines = [
         values.message.trim(),
         "",
         `Name: ${values.name}`,
         `Email: ${values.email}`,
-        values.organisation && `Organisation: ${values.organisation}`,
-        values.type && `Type: ${values.type}`,
-        values.date && `Date: ${values.date}`,
+        values.phone && `Phone: ${values.phone}`,
+        values.city && `City: ${values.city}`,
+        values.purpose && `Reason: ${purposeLabel(values.purpose)}`,
       ].filter((l): l is string => typeof l === "string");
       window.location.href = `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
-      setServerMessage(`Your email app should open with the enquiry drafted to ${site.contact.email}. If it does not, send it to that address directly.`);
+      setServerMessage(`Your email app should open with the message drafted to ${site.contact.email}. If it does not, send it to that address directly.`);
       setStatus("sent");
     } catch (err) {
       setServerMessage(err instanceof Error ? err.message : "Something went wrong.");
@@ -111,9 +125,9 @@ export function EnquiryForm() {
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ember text-ink">
               <Check className="h-6 w-6" strokeWidth={2} />
             </span>
-            <p className="mt-8 font-display text-display-sm">Thank you, {values.name.split(" ")[0]}.</p>
+            <p className="mt-8 font-display text-display-sm">Dhanyavaad, {values.name.split(" ")[0]}.</p>
             <p className="mt-4 max-w-md text-bone/75">
-              {serverMessage || "Your enquiry has been received. We will reply within two working days."}
+              {serverMessage || "Your message has been received. We will reply within a few days."}
             </p>
             <button
               type="button"
@@ -142,27 +156,29 @@ export function EnquiryForm() {
             <Field label="Email" error={errors.email} htmlFor="f-email">
               <input id="f-email" type="email" className="field" autoComplete="email" value={values.email} onChange={set("email")} aria-invalid={!!errors.email} required />
             </Field>
-            <Field label="Organisation (optional)" htmlFor="f-org">
-              <input id="f-org" className="field" autoComplete="organization" value={values.organisation} onChange={set("organisation")} />
+            <Field label="Phone (optional)" htmlFor="f-phone">
+              <input id="f-phone" type="tel" className="field" autoComplete="tel" value={values.phone} onChange={set("phone")} />
             </Field>
-            <Field label="Type of event" htmlFor="f-type">
-              <select id="f-type" className="field appearance-none bg-transparent" value={values.type} onChange={set("type")}>
-                <option value="" className="bg-ink">
-                  Select…
-                </option>
-                {home.contact.eventTypes.map((t) => (
-                  <option key={t} value={t} className="bg-ink">
-                    {t}
-                  </option>
-                ))}
-              </select>
-            </Field>
-            <Field label="Preferred month (optional)" htmlFor="f-date">
-              <input id="f-date" type="month" className="field" value={values.date} onChange={set("date")} />
+            <Field label="City (optional)" htmlFor="f-city">
+              <input id="f-city" className="field" autoComplete="address-level2" value={values.city} onChange={set("city")} />
             </Field>
             <div className="sm:col-span-2">
-              <Field label="Tell us about it" error={errors.message} htmlFor="f-message">
-                <textarea id="f-message" rows={4} className="field resize-none" value={values.message} onChange={set("message")} aria-invalid={!!errors.message} required />
+              <Field label="Reason for writing" htmlFor="f-purpose">
+                <select id="f-purpose" className="field appearance-none bg-transparent" value={values.purpose} onChange={set("purpose")}>
+                  <option value="" className="bg-ink">
+                    Select…
+                  </option>
+                  {home.contact.purposes.map((p) => (
+                    <option key={p.value} value={p.value} className="bg-ink">
+                      {p.label}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            </div>
+            <div className="sm:col-span-2">
+              <Field label="Your message" error={errors.message} htmlFor="f-message">
+                <textarea id="f-message" rows={6} className="field resize-none" value={values.message} onChange={set("message")} aria-invalid={!!errors.message} required />
               </Field>
             </div>
             {/* Honeypot */}
@@ -178,7 +194,7 @@ export function EnquiryForm() {
                     <Loader2 className="h-4 w-4 animate-spin" /> Sending
                   </span>
                 ) : (
-                  "Send enquiry"
+                  "Send message"
                 )}
               </Button>
               {status === "error" && (
@@ -186,7 +202,7 @@ export function EnquiryForm() {
                   {serverMessage}
                 </p>
               )}
-              <p className="text-xs text-ash">We reply to every message. No newsletters unless you ask.</p>
+              <p className="text-xs text-ash">Nominations are kept confidential. No newsletters unless you ask.</p>
             </div>
           </motion.form>
         )}

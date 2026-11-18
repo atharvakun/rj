@@ -72,9 +72,9 @@ export function Footer() {
         <div className="mt-16">
           <p
             aria-hidden
-            className="pointer-events-none select-none font-display text-[clamp(4rem,19vw,22rem)] leading-[0.8] tracking-[-0.04em] text-bone/[0.07]"
+            className="pointer-events-none select-none font-devanagari text-[clamp(3rem,13vw,15rem)] leading-[1.1] text-bone/[0.08]"
           >
-            {site.wordmark}
+            {site.greeting.native}
           </p>
           <div className="mt-6 flex flex-col gap-2 border-t border-smoke pt-5 text-xs text-ash sm:flex-row sm:items-center sm:justify-between">
             <p>

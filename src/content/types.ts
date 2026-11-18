@@ -33,7 +33,8 @@ export type EventCategory =
   | "performing-arts"
   | "community"
   | "exhibition"
-  | "celebration";
+  | "celebration"
+  | "awards";
 
 export type Venue = {
   name: string;
@@ -95,8 +96,11 @@ export type Stat = {
 };
 
 export type TeamMember = {
-  name: string;
+  /** Leave undefined until the person has confirmed; the card then reads “to be confirmed”. */
+  name?: string;
   role: string;
+  /** One line on what the role does, or a short bio. */
+  blurb?: string;
   photo?: ImageAsset;
 };
 

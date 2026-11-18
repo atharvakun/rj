@@ -39,7 +39,7 @@ export function EventCard({
     <TransitionLink
       href={`/events/${event.slug}`}
       data-cursor="label"
-      data-cursor-label={upcoming ? "View event" : "View experience"}
+      data-cursor-label={upcoming ? "View event" : "View event"}
       className={cn("group block", className)}
     >
       <RevealImage

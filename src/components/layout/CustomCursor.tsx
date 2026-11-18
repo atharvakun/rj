@@ -9,7 +9,7 @@ type CursorState = "default" | "link" | "label" | "hidden";
 
 /**
  * Desktop-only cursor. Elements opt in via `data-cursor="label"` plus
- * `data-cursor-label="View experience"`; interactive elements get a
+ * `data-cursor-label="View event"`; interactive elements get a
  * subtle enlargement automatically.
  */
 export function CustomCursor() {
@@ -88,8 +88,8 @@ export function CustomCursor() {
       width: size,
       height: size,
       opacity: state === "hidden" ? 0 : 1,
-      backgroundColor: state === "label" ? "rgba(228,85,43,1)" : "rgba(243,237,227,0)",
-      borderColor: state === "label" ? "rgba(228,85,43,1)" : "rgba(243,237,227,0.9)",
+      backgroundColor: state === "label" ? "rgba(236,138,47,1)" : "rgba(243,237,227,0)",
+      borderColor: state === "label" ? "rgba(236,138,47,1)" : "rgba(243,237,227,0.9)",
       duration: 0.5,
       ease: "expo.out",
     });

@@ -9,9 +9,8 @@ import { pastEvents, upcomingEvents } from "./events";
 import type { EventCategory, EventRecord } from "./types";
 
 export { site } from "./site";
-export { testimonials } from "./testimonials";
-export { stats } from "./stats";
 export { about } from "./about";
+export { awards } from "./awards";
 export type * from "./types";
 
 export const allEvents: EventRecord[] = [...upcomingEvents, ...pastEvents];
@@ -23,6 +22,7 @@ export const categoryLabels: Record<EventCategory, string> = {
   community: "Community",
   exhibition: "Exhibition",
   celebration: "Celebration",
+  awards: "Award ceremony",
 };
 
 const byStartAsc = (a: EventRecord, b: EventRecord) =>
@@ -79,13 +79,4 @@ export function getAdjacentEvents(event: EventRecord) {
     newer: i > 0 ? sorted[i - 1] : null,
     older: i < sorted.length - 1 ? sorted[i + 1] : null,
   };
-}
-
-export function getCategoriesInUse() {
-  const set = new Set(allEvents.map((e) => e.category));
-  return (Object.keys(categoryLabels) as EventCategory[]).filter((c) => set.has(c));
-}
-
-export function getYearsInUse() {
-  return Array.from(new Set(allEvents.map(getEventYear))).sort((a, b) => b - a);
 }

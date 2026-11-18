@@ -1,118 +1,109 @@
-# Ensemble — cultural festival & events website
+# Rajasthan Puraskar Samaj — website
 
-A production-quality marketing site for a cultural events organisation, built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis.
+A single-page site for a community organisation (samaj) of people of Rajasthani origin settled in Maharashtra, which honours members who have achieved distinction in their fields and gathers the community through the year. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis, exported statically to GitHub Pages.
 
-> **Placeholder identity and content.** "Ensemble" is a temporary name. All events, people, quotes, statistics and photographs are placeholders and must be replaced before launch. Nothing here describes a real organisation.
+> **Placeholder content.** The organisation name is the client's. Everything else (events, dates, venues, team roles, award categories, contact details, photographs) is placeholder copy written from the brief and must be confirmed or replaced by the Samaj before launch. No real person is named as a team member or award recipient anywhere on the site.
 
 ## Run it
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm run build      # production build
-npm start
+npm run build      # production build (static export to out/)
 ```
 
-Node 20+ recommended. Fonts load from Google Fonts at build time; temporary photography loads from Wikimedia Commons (credited on `/credits`, sourced in `src/content/photos.ts`) and sample clips from Pexels.
+Node 20+ recommended. Fonts load from Google Fonts at build time; temporary photography loads from Wikimedia Commons (credited on `/credits`, sourced in `src/content/photos.ts`).
+
+## The page
+
+```
+/                 gate intro → hero → where we come from → about + team → upcoming events → the awards → contact
+/events/[slug]    detail page per event (static params from content)
+/credits          photo credits, generated from photos.ts
+```
+
+The navigation links are section anchors (`/#about`, `/#events`, `/#awards`, `/#contact`); the current section is underlined as you scroll. Event pages link back to the sections, and "Register interest" on an event page lands on the contact form with the message pre-filled.
+
+### Opening sequence
+
+`src/components/intro/GateIntro.tsx`: a fort wall with a cusped gateway rises against the dusk, an elephant and a camel walk in to flank it, the doors swing open on the greeting (पधारो म्हारे देस · Welcome to · Rajasthan Puraskar Samaj), then the camera passes through the gate into the hero. It plays once per browser session, has a **Skip intro** button, and never plays for `prefers-reduced-motion` or for deep links to a section. The silhouettes are free Wikimedia Commons SVGs (CC0 / public domain, noted in `silhouettes.ts`).
 
 ## Where things live
 
 ```
 src/
   content/            ← everything editable, no presentation code
-    site.ts           organisation, brand name, contact, socials, nav
-    home.ts           home page copy and hero media
-    events.ts         upcoming + past events (dates, venue, gallery, videos, memories)
-    testimonials.ts   attendee / client / partner quotes
-    stats.ts          impact figures
-    about.ts          manifesto, story blocks, team
+    site.ts           name, greeting, contact, socials, nav
+    home.ts           hero, photo strip, section copy, contact purposes
+    about.ts          manifesto, story blocks, values, team roles
+    awards.ts         award categories, eligibility, process
+    events.ts         upcoming + past events (dates, venue, gallery)
+    photos.ts         placeholder photography with credits
     types.ts          the content model (CMS-shaped)
     index.ts          loaders: getUpcomingEvents(), getPastEvents(), getEventBySlug()…
-  styles/fonts.ts     the three typefaces (swap here)
+  styles/fonts.ts     the typefaces (Fraunces, Manrope, JetBrains Mono, Tiro Devanagari Hindi)
   app/globals.css     design tokens (colours, type scale, easing), base styles
   components/
-    layout/           navigation, footer, smooth scroll, page transitions, cursor, preloader
-    motion/           TextReveal, RevealImage, Counter, Parallax, Stagger
-    ui/               Button, Magnetic, Logo, Eyebrow, Marquee, TransitionLink
-    home/             Hero, NextUp, Statement, Directory, UpcomingEvent, ExperiencesArchive, Impact, Testimonials, TestimonialsWall, About, Contact
-    events/           EventHero, Gallery (+ lightbox), VideoHighlights, Countdown, EventCard, EventsIndex…
-  app/
-    page.tsx                home: hero, next event teaser, manifesto, page directory
-    upcoming/page.tsx       next event showcase with live countdown + other announced dates
-    events/page.tsx         cinematic horizontal archive + full grid with filters
-    about/page.tsx          manifesto, story, philosophy, mission, team, impact numbers
-    testimonials/page.tsx   carousel + wall of every quote
-    contact/page.tsx        enquiry form, email, phone, studio, socials
-    events/[slug]/page.tsx  event detail template (static params from content)
-    sitemap.ts, robots.ts, icon.svg
+    intro/            GateIntro + silhouettes
+    layout/           navigation (section spy), footer, smooth scroll, page transitions, cursor
+    motion/           TextReveal, RevealImage, Parallax, Stagger
+    ui/               Button, Magnetic, Logo, Eyebrow, Marquee, TransitionLink, ArchDefs (the arch clip path)
+    home/             Hero, PhotoStrip, About (with team), UpcomingEvent, Awards, Contact, EnquiryForm
+    events/           EventHero, Gallery (+ lightbox), VideoHighlights, Countdown, EventCard…
   .github/workflows/deploy.yml  static export → GitHub Pages
 ```
 
-## Rebranding (no redesign required)
+## Editing content
 
-1. **Name & copy** — `src/content/site.ts` (`name`, `wordmark`, `descriptor`, `tagline`, contact, socials, nav).
-2. **Logo** — set `site.logo.src` to an image to replace the typographic wordmark, or edit the `Mark` SVG in `src/components/ui/Logo.tsx`.
-3. **Colours** — the `:root` tokens at the top of `src/app/globals.css` (`--color-ink`, `--color-bone`, `--color-ember`, …). Components reference tokens only.
-4. **Type** — `src/styles/fonts.ts`. The fluid type scale lives in `globals.css` under `@theme`.
+- **Team** — `about.ts` → `team.members`. Each entry has a `role`; add `name`, `blurb` and a `photo` once the person has confirmed. Cards without a name read "Name to be confirmed".
+- **Awards** — `awards.ts`: categories (with the Devanagari word shown above each title), eligibility points and the four-step process. Honourees are not listed until the Samaj confirms a real list.
+- **Events** — `events.ts`. An event is **upcoming** until `endsAt` passes. Because the site is static, upcoming / past is decided at build time: push or re-run the workflow after an event to move it into the past. Venues are deliberately marked "to be confirmed". Set `registrationUrl` to send the primary CTA to a ticketing page; without it the CTA opens the contact form pre-filled.
+- **Contact** — `site.ts` → `contact` and `socials` (placeholders), `home.ts` → `contact.purposes` for the "reason for writing" options.
+- **Photos** — replace entries in `photos.ts` with the Samaj's own images (keep `alt` honest). The `/credits` page and footer link exist because the placeholders are Creative Commons; remove them once no CC images remain.
+
+## Rebranding
+
+1. **Name & copy** — `src/content/site.ts`.
+2. **Logo** — set `site.logo.src` to an image, or edit the arch `Mark` in `src/components/ui/Logo.tsx` (`ArchDefs.tsx` holds the shared arch path).
+3. **Colours** — the `:root` tokens at the top of `src/app/globals.css` (`--color-ember` is the kesariya accent, `--color-gold` the metallic). The gate scene's sandstone palette is local to `GateIntro.tsx`.
+4. **Type** — `src/styles/fonts.ts`.
 5. **Favicon** — `src/app/icon.svg`. Add `public/og.jpg` for social previews.
-
-## Updating events
-
-Add or edit records in `src/content/events.ts`. The site derives everything from dates:
-
-- An event is **upcoming** until `endsAt` passes; it then moves to the archive automatically. Pages revalidate hourly (`revalidate = 3600`), so no rebuild is needed for the switch.
-- The **countdown** is computed from `startsAt` in the browser and shows "Happening now" between start and end.
-- Set `registrationUrl` to send the primary CTA to a ticketing page. Without it, the CTA opens the enquiry form pre-filled with the event name.
-- `gallery`, `videos`, `memories`, `facts` are all optional. Videos accept a direct `src` (mp4/webm) or an `embedUrl` (YouTube/Vimeo).
-- If no upcoming events exist, the home page shows a "coming soon" panel with the most recent experience.
-
-Every image is an `ImageAsset` (`src`, `alt`, optional `position` for `object-position`). Components use `object-fit: cover`, so any aspect ratio works; use `position` to keep faces in frame.
 
 ## Deployment (GitHub Pages)
 
-The site is a **static export** (`output: "export"` in `next.config.ts`), so it runs on any static host. Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with `NEXT_PUBLIC_BASE_PATH=/<repo>` and publishes the `out/` folder to GitHub Pages. For a custom domain or a `<user>.github.io` repository the base path is left empty automatically.
+The site is a **static export** (`output: "export"` in `next.config.ts`). Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with `NEXT_PUBLIC_BASE_PATH=/<repo>` and publishes `out/` to GitHub Pages. For a custom domain or a `<user>.github.io` repository the base path is left empty automatically.
 
 Live: https://atharvakun.github.io/rj/
 
-Because there is no server, "upcoming" versus "past" is decided when the site is built. Re-run the workflow (or push) after an event passes to move it into the archive; the countdown itself is live in the browser.
-
 To build the export locally: `NEXT_PUBLIC_BASE_PATH=/rj npm run build` then serve `out/` under `/rj/`.
 
-## Enquiry form
+## Contact form
 
 The form validates client-side, ignores honeypot submissions and then either:
 
 1. POSTs JSON to `NEXT_PUBLIC_ENQUIRY_ENDPOINT` if it is set at build time (Formspree, Basin, Getform, a webhook…). On GitHub Actions, set a repository variable named `ENQUIRY_ENDPOINT`.
-2. Otherwise opens the visitor's email app with the enquiry drafted to `site.contact.email`.
+2. Otherwise opens the visitor's email app with the message drafted to `site.contact.email`.
 
-See `.env.example`.
+`?purpose=nomination#contact` pre-selects "Nominate someone" and drops in a nomination template; `?event=<slug>#contact` pre-fills an attendance request. See `.env.example`.
 
 ## Motion system
 
-A single motion language is defined in `src/lib/gsap.ts` (easing, durations, stagger). Section treatments differ on purpose:
+A single motion language is defined in `src/lib/gsap.ts` (easing, durations, stagger).
 
 | Section | Treatment |
 | --- | --- |
-| Preloader | Counter + wordmark, once per session; curtain lifts into the hero |
+| Intro | Fort gate scene: wall rises, animals walk in, doors swing open in 3D, greeting rises, zoom through the opening (masked out of the wall) |
 | Hero | Slit clip-path image reveal, staggered word entrance, scroll-driven scale + parallax, nav drop-in |
-| Upcoming | Sticky poster with parallax, masked line reveals, hairline-drawn meta grid, flip-digit countdown |
-| Archive | Pinned horizontal scroll (desktop) with container-driven parallax, drag-to-explore mapped to page scroll, native swipe on mobile, category filters |
-| Impact | Drifting outlined marquee, hairlines drawing in, counters |
-| Testimonials | Directional slide carousel, autoplay with pause/visibility awareness, swipe, keyboard |
-| About | Pinned manifesto with scroll-scrubbed word emphasis, scroll-scaled imagery, parallax |
+| Where we come from | Two counter-rotating photo marquees, nudged by scroll; hover pauses |
+| About | Pinned manifesto with scroll-scrubbed word emphasis, scroll-scaled imagery, arch-shaped team tiles |
+| Upcoming | Sticky poster with parallax, masked line reveals, flip-digit countdown |
+| Awards | Sticky intro with rotating seal, staggered category list |
 | Contact | Word-split headline, magnetic email link, form states |
 | Footer | Sticky reveal beneath the last section |
-| Routes | Curtain wipe (`TransitionProvider`) + per-route entrance (`template.tsx`) |
+| Routes | Curtain wipe (`TransitionProvider`) + per-route entrance (`template.tsx`); anchors scroll smoothly, including across pages |
 
-Desktop extras: custom cursor with contextual labels (`data-cursor-label`), magnetic buttons, scroll progress bar. All of it respects `prefers-reduced-motion` (Lenis, cursor and reveals switch off; content is always visible without JavaScript).
+Desktop extras: custom cursor with contextual labels, magnetic buttons, scroll progress bar. All of it respects `prefers-reduced-motion`.
 
 ## Connecting a CMS later
 
-Components never import data files directly, only the loaders in `src/content/index.ts`. To integrate Sanity, Payload, Contentful or a database, make those loaders async and fetch, keeping the `EventRecord` shape (or map to it). No component changes are required.
-
-## Accessibility & performance notes
-
-- Semantic landmarks, skip link, focus-visible styles, `aria-pressed` filters, dialog semantics on lightbox/video/menu, live region for the countdown.
-- `next/image` with `sizes` everywhere, AVIF/WebP, priority only on hero media.
-- Animations use transforms, opacity and clip-path only; ScrollTriggers are scoped and cleaned up via `useGSAP`.
-- No horizontal overflow: `overflow-x: clip` on body plus contained tracks.
+Components never import data files directly, only the loaders in `src/content/index.ts`. To integrate Sanity, Payload, Contentful or a database, make those loaders async and fetch, keeping the `EventRecord` shape (or map to it).

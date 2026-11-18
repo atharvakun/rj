@@ -81,6 +81,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
   return (
     <section
       ref={root}
+      id="top"
       className="relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-ink text-bone"
       aria-label="Introduction"
     >
@@ -129,7 +130,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
         </p>
         {next && nextParts && (
           <TransitionLink
-            href="/upcoming"
+            href="/#events"
             data-hero="fade"
             className="group flex items-center gap-4 opacity-0"
           >
@@ -145,11 +146,11 @@ export function Hero({ next }: { next: EventRecord | null }) {
       {/* Content */}
       <div ref={content} className="container-x relative z-10 pb-10 md:pb-14">
         <div className="grid items-end gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-9">
+          <div className="lg:col-span-8">
             <div data-hero="fade" className="opacity-0">
               <Eyebrow>{hero.eyebrow}</Eyebrow>
             </div>
-            <h1 className="mt-6 font-display text-display-xl text-balance">
+            <h1 className="mt-6 font-display text-[clamp(2.6rem,6.3vw,6.6rem)] leading-[0.95] tracking-[-0.03em] text-balance">
               {plain.map((w, i) => (
                 <span key={i} data-hero="word" className="mr-[0.22em] inline-block overflow-hidden pb-[0.1em] -mb-[0.1em] align-bottom">
                   <span className="inline-block">{w}</span>
@@ -162,20 +163,25 @@ export function Hero({ next }: { next: EventRecord | null }) {
               ))}
             </h1>
           </div>
-          <div className="lg:col-span-3 lg:pb-3">
+          <div className="lg:col-span-4 lg:pb-3">
             <p data-hero="fade" className="max-w-md text-pretty text-[0.95rem] leading-relaxed text-bone/80 opacity-0 md:text-base">
               {hero.intro}
             </p>
             <div data-hero="fade" className="mt-7 flex flex-wrap items-center gap-4 opacity-0">
-              <Button href={hero.cta.href} size="md">
+              <Button href={hero.cta.href} size="md" variant="ember">
                 {hero.cta.label}
               </Button>
-              {next && daysToNext !== null && (
-                <TransitionLink href="/upcoming" className="link-line text-sm text-bone/80 lg:hidden">
+              <Button href={hero.secondary.href} size="md" variant="outline">
+                {hero.secondary.label}
+              </Button>
+            </div>
+            {next && daysToNext !== null && (
+              <p data-hero="fade" className="mt-5 text-sm text-bone/70 opacity-0 lg:hidden">
+                <TransitionLink href="/#events" className="link-line">
                   Next event in {daysToNext} days
                 </TransitionLink>
-              )}
-            </div>
+              </p>
+            )}
           </div>
         </div>
 
@@ -185,7 +191,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
             {site.descriptor}
           </p>
           <TransitionLink
-            href="/#next"
+            href="/#origins"
             data-hero="fade"
             aria-label="Scroll to the next section"
             className="group flex items-center gap-3 opacity-0"
@@ -198,7 +204,6 @@ export function Hero({ next }: { next: EventRecord | null }) {
           </TransitionLink>
         </div>
       </div>
-
     </section>
   );
 }

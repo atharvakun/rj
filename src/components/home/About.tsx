@@ -1,15 +1,18 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { about } from "@/content";
 import { home } from "@/content/home";
+import type { TeamMember } from "@/content/types";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { RevealImage } from "@/components/motion/RevealImage";
 import { Stagger } from "@/components/motion/Stagger";
 import { Parallax } from "@/components/motion/Parallax";
+import { archClip } from "@/components/ui/ArchDefs";
 import { pad2 } from "@/lib/utils";
 
 export function About() {
@@ -59,7 +62,7 @@ export function About() {
         <Eyebrow className="text-clay">{home.about.eyebrow}</Eyebrow>
         <p className="mt-8 max-w-5xl font-display text-[clamp(1.9rem,4.6vw,4.6rem)] leading-[1.08] tracking-[-0.02em] text-balance">
           {about.manifesto.split(" ").map((w, i) => (
-            <span key={i} data-word className="inline-block mr-[0.26em]">
+            <span key={i} data-word className="mr-[0.26em] inline-block">
               {w}
             </span>
           ))}
@@ -67,7 +70,7 @@ export function About() {
       </div>
 
       {/* Story grid */}
-      <div className="container-x grid gap-y-20 pb-28 lg:grid-cols-12 lg:gap-x-10 lg:pb-40">
+      <div className="container-x grid gap-y-20 pb-24 lg:grid-cols-12 lg:gap-x-10 lg:pb-32">
         <div className="lg:col-span-7">
           <RevealImage
             image={about.images.primary}
@@ -79,9 +82,6 @@ export function About() {
         </div>
         <div className="flex flex-col justify-end lg:col-span-4 lg:col-start-9">
           <Block index={1} title={about.who.title} body={about.who.body} />
-          <div className="mt-16">
-            <Block index={2} title={about.philosophy.title} body={about.philosophy.body} />
-          </div>
         </div>
 
         <div className="lg:col-span-4 lg:pt-20">
@@ -90,16 +90,16 @@ export function About() {
           </Parallax>
         </div>
         <div className="lg:col-span-7 lg:col-start-6">
-          <Block index={3} title={about.mission.title} body={about.mission.body} />
+          <Block index={2} title={about.mission.title} body={about.mission.body} />
           <div className="mt-16">
             <p className="eyebrow text-clay">
-              {pad2(4)} — {about.special.title}
+              {pad2(3)} — {about.values.title}
             </p>
             <Stagger as="ul" className="mt-6 divide-y divide-ink/15 border-y border-ink/15" selector=":scope > li" y={20}>
-              {about.special.points.map((p, i) => (
+              {about.values.points.map((p, i) => (
                 <li key={p} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-4 py-5">
                   <span className="font-mono text-xs text-clay">{pad2(i + 1)}</span>
-                  <span className="font-display text-display-sm leading-tight">{p}</span>
+                  <span className="font-display text-[clamp(1.25rem,1.8vw,1.75rem)] leading-tight">{p}</span>
                 </li>
               ))}
             </Stagger>
@@ -109,17 +109,26 @@ export function About() {
         <div className="lg:col-span-5 lg:col-start-2">
           <RevealImage image={about.images.tertiary} sizes="(min-width: 1024px) 36vw, 100vw" className="aspect-[5/4]" reveal="right" parallax={0.15} />
         </div>
-        <div className="lg:col-span-5 lg:col-start-8 lg:self-end">
-          <p className="eyebrow text-clay">The team</p>
-          <Stagger className="mt-6" selector=":scope > div" y={20}>
-            {about.team.map((m) => (
-              <div key={m.name + m.role} className="flex items-baseline justify-between gap-6 border-t border-ink/15 py-4 last:border-b">
-                <span className="font-medium">{m.name}</span>
-                <span className="text-right text-sm text-clay">{m.role}</span>
-              </div>
-            ))}
-          </Stagger>
+      </div>
+
+      {/* Team */}
+      <div id="team" className="container-x scroll-mt-16 border-t border-ink/15 pb-28 pt-20 lg:pb-40 lg:pt-28">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Eyebrow className="text-clay">{about.team.eyebrow}</Eyebrow>
+            <TextReveal as="h3" className="mt-5 font-display text-display-md text-balance">
+              {about.team.title}
+            </TextReveal>
+          </div>
+          <TextReveal as="p" className="max-w-md self-end text-sm leading-relaxed text-clay lg:col-span-5 lg:col-start-8" delay={0.15}>
+            {about.team.note}
+          </TextReveal>
         </div>
+        <Stagger as="ul" className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 lg:grid-cols-4" selector=":scope > li" y={28} stagger={0.06}>
+          {about.team.members.map((m) => (
+            <TeamCard key={m.role} member={m} />
+          ))}
+        </Stagger>
       </div>
     </section>
   );
@@ -135,5 +144,45 @@ function Block({ index, title, body }: { index: number; title: string; body: str
         {body}
       </TextReveal>
     </div>
+  );
+}
+
+function initials(text: string) {
+  return text
+    .split(/[\s&]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase())
+    .join("");
+}
+
+function TeamCard({ member }: { member: TeamMember }) {
+  return (
+    <li className="group">
+      <div className="relative aspect-[4/5] overflow-hidden bg-sand" style={archClip}>
+        {member.photo ? (
+          <Image
+            src={member.photo.src}
+            alt={member.photo.alt}
+            fill
+            sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 45vw"
+            className="object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.05]"
+            style={{ objectPosition: member.photo.position ?? "50% 30%" }}
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_50%_100%,rgba(212,162,76,0.45),transparent_70%)] transition-opacity duration-700 group-hover:opacity-80" />
+            <span className="absolute inset-0 flex items-center justify-center font-display text-[clamp(2.5rem,5vw,4.5rem)] text-ink/15 transition-transform duration-700 ease-out-expo group-hover:scale-105">
+              {initials(member.name ?? member.role)}
+            </span>
+          </>
+        )}
+      </div>
+      <p className="mt-4 text-[0.95rem] font-medium leading-snug">
+        {member.name ?? <span className="font-display italic font-normal text-clay">Name to be confirmed</span>}
+      </p>
+      <p className="mt-1 text-sm text-clay">{member.role}</p>
+      {member.blurb && <p className="mt-2 hidden text-xs leading-relaxed text-clay/80 sm:block">{member.blurb}</p>}
+    </li>
   );
 }

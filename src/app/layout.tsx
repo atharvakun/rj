@@ -4,11 +4,12 @@ import { site } from "@/content/site";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { TransitionProvider } from "@/components/layout/TransitionProvider";
 import { IntroProvider } from "@/components/layout/IntroProvider";
-import { Preloader } from "@/components/layout/Preloader";
+import { GateIntro } from "@/components/intro/GateIntro";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/layout/CustomCursor";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { ArchDefs } from "@/components/ui/ArchDefs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -49,10 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <ArchDefs />
         <IntroProvider>
           <SmoothScroll>
             <TransitionProvider>
-              <Preloader />
+              <GateIntro />
               <ScrollProgress />
               <Navigation />
               <div id="main" className="relative z-10 bg-ink">

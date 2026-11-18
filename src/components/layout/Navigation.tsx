@@ -14,15 +14,20 @@ import { useIntro } from "./IntroProvider";
 import { useLenis } from "./SmoothScroll";
 
 const overlayEase = [0.76, 0, 0.24, 1] as const;
+const NOMINATE = { label: "Nominate", href: "/?purpose=nomination#contact" };
+
+const sectionOf = (href: string) => (href.includes("#") ? href.split("#")[1] : null);
 
 /**
- * Persistent top menu, present on every page. Sits transparent over the
- * opening of a page and condenses onto a translucent bar once scrolled.
+ * Persistent top menu. Transparent over the opening of a page, condensing
+ * onto a translucent bar once scrolled. On the home page the links are
+ * section anchors and the current section is underlined.
  */
 export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const header = useRef<HTMLElement>(null);
   const { ready } = useIntro();
   const lenis = useLenis();
@@ -50,6 +55,34 @@ export function Navigation() {
     { scope: header, dependencies: [ready], revertOnUpdate: true },
   );
 
+  // Section spy on the home page.
+  useEffect(() => {
+    if (pathname !== "/") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setActiveSection(null);
+      return;
+    }
+    const ids = site.nav.map((n) => sectionOf(n.href)).filter((id): id is string => Boolean(id));
+    const onScroll = () => {
+      const line = window.scrollY + window.innerHeight * 0.4;
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= line) current = id;
+      }
+      setActiveSection(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname]);
+
   // Close on route change, lock scroll while open.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -74,7 +107,12 @@ export function Navigation() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
+  const isActive = (href: string) => {
+    const section = sectionOf(href);
+    if (section) return pathname === "/" && activeSection === section;
+    if (href === "/") return pathname === "/" && activeSection === null;
+    return pathname === href || pathname.startsWith(href + "/");
+  };
   const condensed = scrolled && !open;
   const menuItems = [{ label: "Home", href: "/" }, ...site.nav];
 
@@ -120,10 +158,10 @@ export function Navigation() {
               <div data-nav-item className="hidden opacity-0 lg:block">
                 <Magnetic strength={0.25}>
                   <TransitionLink
-                    href="/contact"
+                    href={NOMINATE.href}
                     className="group inline-flex h-10 items-center gap-2 rounded-full border border-current/40 px-5 text-[0.85rem] font-medium transition-colors duration-500 hover:border-current"
                   >
-                    Enquire
+                    {NOMINATE.label}
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.75} />
                   </TransitionLink>
                 </Magnetic>
@@ -170,7 +208,7 @@ export function Navigation() {
           >
             <div className="container-x flex flex-1 flex-col justify-end pb-12 pt-nav">
               <nav aria-label="Mobile" className="flex flex-col gap-1">
-                {menuItems.map((item, i) => (
+                {[...menuItems, NOMINATE].map((item, i) => (
                   <div key={item.href} className="overflow-hidden">
                     <motion.div
                       initial={{ y: "110%" }}
@@ -180,6 +218,7 @@ export function Navigation() {
                     >
                       <TransitionLink
                         href={item.href}
+                        onClick={() => setOpen(false)}
                         aria-current={isActive(item.href) ? "page" : undefined}
                         className={cn(
                           "group flex items-baseline justify-between py-2 font-display text-display-md",

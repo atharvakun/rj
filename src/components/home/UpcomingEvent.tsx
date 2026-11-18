@@ -13,7 +13,7 @@ import { TransitionLink } from "@/components/ui/TransitionLink";
 import { Countdown } from "@/components/events/Countdown";
 
 export function registrationHref(event: EventRecord) {
-  return event.registrationUrl ?? `/contact?event=${encodeURIComponent(event.slug)}`;
+  return event.registrationUrl ?? `/?event=${encodeURIComponent(event.slug)}#contact`;
 }
 
 export function UpcomingEvent({ events, fallback, className }: { events: EventRecord[]; fallback: EventRecord | null; className?: string }) {
@@ -27,14 +27,14 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
   const poster = next.poster ?? next.cover;
 
   return (
-    <section id="upcoming" className="relative theme-stage scroll-mt-16">
+    <section id="events" className="relative theme-stage scroll-mt-16">
       <div className={cn("container-x pb-28 md:pb-40", className ?? "pt-24 md:pt-32")}>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Copy */}
           <div className="order-2 flex flex-col lg:order-1 lg:col-span-7">
             <div className="flex items-center justify-between">
               <Eyebrow>
-                {home.upcoming.eyebrow} · {pad2(1)}/{pad2(events.length)}
+                {home.events.eyebrow} · {pad2(1)}/{pad2(events.length)}
               </Eyebrow>
               <span className="eyebrow text-ash">{categoryLabels[next.category]}</span>
             </div>
@@ -71,7 +71,7 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
 
             <Stagger className="mt-10 flex flex-wrap items-center gap-4" y={16}>
               <Button href={registrationHref(next)} size="lg" variant="ember">
-                {next.registrationUrl ? "Register" : "Register interest"}
+                {next.registrationUrl ? "Register" : home.events.registerCta}
               </Button>
               <Button href={`/events/${next.slug}`} variant="outline" size="lg">
                 Event details
@@ -113,7 +113,7 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
         {/* Countdown */}
         <div className="mt-20 border-t border-smoke pt-10 md:mt-28">
           <div className="mb-8 flex items-center justify-between">
-            <Eyebrow>Doors open in</Eyebrow>
+            <Eyebrow>{home.events.countdown}</Eyebrow>
             <span className="hidden font-mono text-xs text-ash md:block">
               {start.weekday}, {start.day} {start.month} {start.year} · {start.time}
             </span>
@@ -124,7 +124,7 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
         {/* Other upcoming */}
         {events.length > 1 && (
           <div className="mt-20 border-t border-smoke md:mt-28">
-            <p className="eyebrow py-6 text-ash">Also coming up</p>
+            <p className="eyebrow py-6 text-ash">{home.events.alsoComing}</p>
             <ul>
               {events.slice(1).map((e, i) => {
                 const p = formatDateParts(e.startsAt, e.timeZone);
@@ -176,19 +176,19 @@ function Meta({ icon, label, children }: { icon?: React.ReactNode; label: string
 
 function ComingSoon({ fallback, className }: { fallback: EventRecord | null; className?: string }) {
   return (
-    <section id="upcoming" className="relative theme-stage scroll-mt-16">
+    <section id="events" className="relative theme-stage scroll-mt-16">
       <div className={cn("container-x pb-28 md:pb-40", className ?? "pt-24 md:pt-32")}>
-        <Eyebrow>{home.upcoming.eyebrow}</Eyebrow>
+        <Eyebrow>{home.events.eyebrow}</Eyebrow>
         <div className="mt-8 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <TextReveal as="h2" className="font-display text-display-lg text-balance">
-              {home.upcoming.comingSoonTitle}
+              {home.events.comingSoonTitle}
             </TextReveal>
             <TextReveal as="p" className="mt-6 max-w-xl text-lead text-bone/80" delay={0.15}>
-              {home.upcoming.comingSoonBody}
+              {home.events.comingSoonBody}
             </TextReveal>
             <Stagger className="mt-10 flex gap-4">
-              <Button href="/contact" size="lg" variant="ember">
+              <Button href="/#contact" size="lg" variant="ember">
                 Keep me posted
               </Button>
             </Stagger>
@@ -196,7 +196,7 @@ function ComingSoon({ fallback, className }: { fallback: EventRecord | null; cla
           {fallback && (
             <div className="lg:col-span-5">
               <p className="eyebrow mb-4 text-ash">Most recently</p>
-              <TransitionLink href={`/events/${fallback.slug}`} data-cursor="label" data-cursor-label="View experience" className="block">
+              <TransitionLink href={`/events/${fallback.slug}`} data-cursor="label" data-cursor-label="View event" className="block">
                 <RevealImage image={fallback.cover} sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/5]" parallax={0.2} hoverZoom />
                 <p className="mt-4 font-display text-display-sm">{fallback.title}</p>
                 <p className="mt-1 text-sm text-ash">

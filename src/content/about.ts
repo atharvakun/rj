@@ -1,31 +1,33 @@
 import type { TeamMember } from "./types";
 import { photos } from "./photos";
 
-/** PLACEHOLDER copy and team. Imagery from `photos.ts`. */
+/**
+ * ABOUT THE SAMAJ
+ * --------------------------------------------------------------------------
+ * PLACEHOLDER copy, written from the brief, for the Samaj to correct. Team
+ * names are deliberately left unconfirmed: no real person is named here until
+ * the office-bearers approve it. Imagery from `photos.ts`.
+ */
 export const about = {
   /** Scroll-highlighted manifesto. Keep it to two or three sentences. */
   manifesto:
-    "We make gatherings. Festivals, concerts, exhibitions and small rituals for neighbourhoods, built on the belief that a crowd, well cared for, becomes a community for a night.",
+    "A samaj is a society of people who look after one another. Ours is made of families who left Rajasthan for Maharashtra, built their lives here, and never stopped belonging to both.",
 
   who: {
     title: "Who we are",
-    body: "A production studio of programmers, designers, technicians and hosts. We started with a single riverside evening and have been making rooms for people to meet in ever since.",
-  },
-  philosophy: {
-    title: "Our philosophy",
-    body: "Culture is not something an audience consumes. It is something a crowd does together. We design for participation: short queues, long tables, sightlines for everyone and endings worth staying for.",
+    body: "Rajasthan Puraskar Samaj is a community organisation formed by Rajasthanis settled across Maharashtra. It began with a simple thought: the achievements of our people here deserve to be recognised, first of all, by their own community.",
   },
   mission: {
-    title: "Our mission",
-    body: "To make cultural experiences that are generous, well-crafted and open, and to leave every place and every partner better than we found them.",
+    title: "What we do",
+    body: "Each year we honour people of Rajasthani origin living in Maharashtra who have achieved distinction in business, education, the arts, medicine, public service and other fields. Between ceremonies, we gather: for Gangaur and Teej, for Holi and Diwali, and for the plain pleasure of being among our own.",
   },
-  special: {
-    title: "What makes it different",
+  values: {
+    title: "How we go about it",
     points: [
-      "Programmes built around place, not formats imported from elsewhere.",
-      "Production standards from touring stages, applied to community lawns.",
-      "A crew that stays until the last guest has left.",
-      "Honest ticketing, real food and a welcome for every age.",
+      "Recognition earned, never bought. Nominations are open; the jury is drawn from the community.",
+      "Two homes, one samaj. Every gathering honours Rajasthan and Maharashtra alike.",
+      "Open to all Rajasthanis: every district, language, faith and generation.",
+      "The next generation in the room, always.",
     ],
   },
 
@@ -35,10 +37,20 @@ export const about = {
     tertiary: photos.aboutTertiary,
   },
 
-  team: [
-    { name: "Placeholder name", role: "Founder & Creative Director" },
-    { name: "Placeholder name", role: "Head of Production" },
-    { name: "Placeholder name", role: "Programme Curator" },
-    { name: "Placeholder name", role: "Community & Partnerships" },
-  ] satisfies TeamMember[],
+  team: {
+    eyebrow: "The team",
+    title: "The people behind the Samaj",
+    note: "Office-bearers and committee members will be named here once confirmed by the Samaj.",
+    /** `name` left undefined renders a “to be confirmed” card. Add `photo` to show a portrait. */
+    members: [
+      { role: "President", blurb: "Leads the Samaj and chairs the general body." },
+      { role: "Vice President", blurb: "Stands in for the President and leads outreach." },
+      { role: "General Secretary", blurb: "Runs the office, the calendar and correspondence." },
+      { role: "Treasurer", blurb: "Keeps the accounts and publishes them to members." },
+      { role: "Awards Committee Chair", blurb: "Convenes the jury and oversees nominations." },
+      { role: "Cultural Secretary", blurb: "Programmes the festivals and gatherings." },
+      { role: "Youth Wing Lead", blurb: "Brings the next generation into the work." },
+      { role: "Media & Communications", blurb: "Tells the community what is happening." },
+    ] satisfies TeamMember[],
+  },
 };

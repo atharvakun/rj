@@ -2,7 +2,7 @@
  * Typography — swap fonts here without touching components.
  * Each font exposes a CSS variable consumed by `globals.css`.
  */
-import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Manrope, JetBrains_Mono, Tiro_Devanagari_Hindi } from "next/font/google";
 
 export const display = Fraunces({
   subsets: ["latin"],
@@ -26,4 +26,13 @@ export const mono = JetBrains_Mono({
   display: "swap",
 });
 
-export const fontClassNames = `${display.variable} ${sans.variable} ${mono.variable}`;
+/** Devanagari for the greeting and award names; pairs with the Fraunces display face. */
+export const devanagari = Tiro_Devanagari_Hindi({
+  subsets: ["devanagari"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-devanagari",
+  display: "swap",
+});
+
+export const fontClassNames = `${display.variable} ${sans.variable} ${mono.variable} ${devanagari.variable}`;

@@ -1,122 +1,83 @@
 import type { VideoAsset } from "./types";
-import { photos } from "./photos";
+import { photos, type CreditedImage } from "./photos";
 
 /**
- * SITE COPY & MEDIA — placeholder content, edit freely.
- * Keyed by page / section. Each top-level page reads its header copy from `pages`.
+ * HOME PAGE COPY & MEDIA — placeholder content, edit freely.
+ * The site is a single scrolling page; each key below is one section.
  * Imagery comes from `photos.ts` (temporary, credited placeholders).
  */
 export const home = {
+  /** Opening sequence: fort gate, elephant and camel, then the greeting. */
+  intro: {
+    welcome: "Welcome to",
+    skip: "Skip intro",
+  },
+
   hero: {
-    eyebrow: "Cultural festivals, concerts & community events",
+    eyebrow: "A samaj of Rajasthanis in Maharashtra",
     /** The last `emphasisWords` words are set in italic display type. */
-    headline: "Gatherings worth remembering.",
-    emphasisWords: 1,
+    headline: "Honouring the Rajasthanis who made Maharashtra home.",
+    emphasisWords: 2,
     intro:
-      "We design and produce festivals, performances and celebrations that bring people together, and stay with them long after the lights go down.",
-    cta: { label: "Explore experiences", href: "/events" },
+      "We are a community with roots in Rajasthan and lives in Maharashtra. Each year we recognise those among us whose work, service and craft have made a difference, and through the year we gather to celebrate where we come from.",
+    cta: { label: "Nominate someone", href: "/?purpose=nomination#contact" },
+    secondary: { label: "About the awards", href: "/#awards" },
     image: photos.hero,
     /**
      * Optional ambient loop over the photograph. Supply `{ src, title, poster }`
-     * with the organisation's own footage; left unset, the hero uses the still.
+     * with the Samaj's own footage; left unset, the hero uses the still.
      */
     video: undefined as VideoAsset | undefined,
   },
 
-  /** Home: compact teaser for the next event. */
-  next: {
-    eyebrow: "Next up",
-    cta: "All upcoming",
-  },
-
-  /** Home: manifesto strip leading to the About page. */
-  statement: {
-    eyebrow: "Why we do it",
-    cta: "Read our story",
-  },
-
-  /** Home: directory of the site's pages. */
-  directory: {
-    eyebrow: "Explore",
-    title: "Find your way around.",
-    items: [
-      { href: "/upcoming", title: "Upcoming", blurb: "Dates, venues and a live countdown to the next gathering.", image: photos.dirUpcoming },
-      { href: "/events", title: "Experiences", blurb: "A cinematic archive of festivals, concerts and small rituals.", image: photos.dirEvents },
-      { href: "/about", title: "About", blurb: "Who we are, what we believe and the people behind the work.", image: photos.dirAbout },
-      { href: "/testimonials", title: "Testimonials", blurb: "What audiences, artists and partners said afterwards.", image: photos.dirTestimonials },
-      { href: "/contact", title: "Contact", blurb: "Commission a festival, a programme or a celebration.", image: photos.dirContact },
-    ],
-  },
-
-  /** Page headers for the inner pages. */
-  pages: {
-    upcoming: {
-      eyebrow: "Upcoming",
-      title: "Save the dates.",
-      intro: "Everything announced so far, soonest first, with a live countdown. Register interest and we will keep you posted.",
-    },
-    events: {
-      eyebrow: "Archive",
-      title: "Experiences",
-    },
-    about: {
-      eyebrow: "About us",
-      title: "Made for the crowd.",
-      intro: "A production studio making festivals, concerts and community celebrations. Our story, our philosophy and the people behind the work.",
-    },
-    testimonials: {
-      eyebrow: "Testimonials",
-      title: "What they said afterwards.",
-      intro: "Words from audiences, artists, venues and partners. Placeholder quotes until real, permissioned ones replace them.",
-    },
-    credits: {
-      eyebrow: "Credits",
-      title: "Photography",
-      intro: "The photographs on this site are temporary placeholders from Wikimedia Commons, used under the licences listed here, until the organisation's own imagery replaces them.",
-    },
-  },
-
-  upcoming: {
-    eyebrow: "What is next",
-    comingSoonTitle: "The next one is taking shape.",
-    comingSoonBody:
-      "We are planning our next gathering now. Leave your details and you will be the first to know when dates are announced.",
-  },
-
-  archive: {
-    eyebrow: "Our experiences",
-    title: "An archive of nights worth keeping.",
-    intro: "Festivals, concerts, exhibitions and small rituals, from the last few years.",
-    allEyebrow: "Browse everything",
-    allTitle: "Every gathering, by kind and year.",
-  },
-
-  impact: {
-    eyebrow: "The numbers",
-    title: "Measured in people, not posts.",
-    note: "Illustrative figures. Replace with verified numbers before launch.",
-    marquee: ["Culture", "Community", "Creativity", "Celebration", "Memory"],
-  },
-
-  testimonials: {
-    eyebrow: "People",
-    title: "What they said afterwards.",
-  },
-
-  testimonialsWall: {
-    eyebrow: "All voices",
-    title: "Every word, in one place.",
-    note: "Placeholder testimonials. Replace with real, permissioned quotes before launch.",
+  /** Photo strip beneath the hero: many Rajasthan images in slow motion. */
+  strip: {
+    eyebrow: "Where we come from",
+    title: "Desert, colour, music, and a long road to the coast.",
+    rows: [
+      [photos.fl_cover, photos.ag_cover, photos.ln_cover, photos.of_cover, photos.dirContact, photos.bh_g4],
+      [photos.dirUpcoming, photos.fl_g5, photos.rr_cover, photos.dirEvents, photos.of_g1, photos.fl_g3],
+    ] as CreditedImage[][],
   },
 
   about: {
-    eyebrow: "Our manifesto",
+    eyebrow: "About the Samaj",
+  },
+
+  events: {
+    eyebrow: "Upcoming events",
+    comingSoonTitle: "The next gathering is taking shape.",
+    comingSoonBody: "Dates for the next Samaroh and festival gatherings will appear here. Leave your details and you will be the first to know.",
+    alsoComing: "Also on the calendar",
+    countdown: "Counting down",
+    detailsCta: "Event details",
+    registerCta: "Register interest",
   },
 
   contact: {
-    eyebrow: "Work with us",
-    title: "Let us make something worth remembering.",
-    body: "Festivals, cultural programmes, brand experiences and community events. Tell us what you are imagining and we will reply within two working days.",
-    eventTypes: ["Festival", "Concert or live performance", "Exhibition", "Community event", "Corporate or brand experience", "Something else"],
+    eyebrow: "Get in touch",
+    title: "Nominate, join, or simply say namaste.",
+    body: "Nominate someone for the Puraskar, ask about membership, volunteer at a gathering, or propose a partnership. We reply to every message.",
+    /** Options for the “reason for writing” field; `nomination` is pre-selected from the awards links. */
+    purposes: [
+      { value: "nomination", label: "Nominate someone for the Puraskar" },
+      { value: "membership", label: "Join the Samaj" },
+      { value: "event", label: "Attend or ask about an event" },
+      { value: "volunteer", label: "Volunteer" },
+      { value: "partner", label: "Partner or sponsor" },
+      { value: "other", label: "Something else" },
+    ],
+    nominationTemplate:
+      "I would like to nominate ______ for the Rajasthan Puraskar.\n\nTheir roots in Rajasthan:\nTheir work in Maharashtra:\nWhy it matters:\n",
+  },
+
+  /** Page header for the credits page. */
+  pages: {
+    credits: {
+      eyebrow: "Credits",
+      title: "Photography",
+      intro:
+        "The photographs on this site are temporary placeholders from Wikimedia Commons, used under the licences listed here, until the Samaj's own imagery replaces them.",
+    },
   },
 } as const;

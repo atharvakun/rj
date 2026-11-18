@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/content";
-import { cn } from "@/lib/utils";
 import { home } from "@/content/home";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TextReveal } from "@/components/motion/TextReveal";
@@ -9,12 +8,12 @@ import { Stagger } from "@/components/motion/Stagger";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { EnquiryForm } from "./EnquiryForm";
 
-export function Contact({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
+export function Contact() {
   return (
-    <section id="contact" className={cn("theme-stage relative scroll-mt-16", headingAs === "h2" && "border-t border-smoke")}>
-      <div className={cn("container-x pb-28 md:pb-40", headingAs === "h1" ? "pt-32 md:pt-44" : "pt-28 md:pt-40")}>
+    <section id="contact" className="theme-stage relative scroll-mt-16 border-t border-smoke">
+      <div className="container-x pb-28 pt-28 md:pb-40 md:pt-40">
         <Eyebrow>{home.contact.eyebrow}</Eyebrow>
-        <TextReveal as={headingAs} className="mt-8 max-w-6xl font-display text-display-xl text-balance" split="words">
+        <TextReveal as="h2" className="mt-8 max-w-6xl font-display text-display-lg text-balance lg:text-display-xl" split="words">
           {home.contact.title}
         </TextReveal>
 
@@ -30,11 +29,14 @@ export function Contact({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
                 <Magnetic strength={0.15} className="block w-fit">
                   <a href={`mailto:${site.contact.email}`} className="group mt-3 inline-flex items-center gap-2 font-display text-display-sm">
                     <span className="link-line">{site.contact.email}</span>
-                    <ArrowUpRight className="h-6 w-6 text-ash transition-all duration-500 ease-out-expo group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ember" strokeWidth={1.25} />
+                    <ArrowUpRight
+                      className="h-6 w-6 text-ash transition-all duration-500 ease-out-expo group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-ember"
+                      strokeWidth={1.25}
+                    />
                   </a>
                 </Magnetic>
               </div>
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid gap-10 sm:grid-cols-2">
                 <div>
                   <p className="eyebrow text-ash">Phone</p>
                   <a href={site.contact.phoneHref} className="link-line mt-3 inline-block">
@@ -43,7 +45,7 @@ export function Contact({ headingAs = "h2" }: { headingAs?: "h1" | "h2" }) {
                   <p className="mt-2 text-sm text-ash">{site.contact.hours}</p>
                 </div>
                 <div>
-                  <p className="eyebrow text-ash">Studio</p>
+                  <p className="eyebrow text-ash">Office</p>
                   <address className="mt-3 not-italic leading-relaxed">
                     {site.contact.address.map((l) => (
                       <span key={l} className="block">
