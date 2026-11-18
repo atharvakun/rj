@@ -1,8 +1,8 @@
-# Rajasthan Puraskar Samaj — website
+# Rajasthan Bhushan Puraskar Samiti — website
 
-A single-page site for a community organisation (samaj) of people of Rajasthani origin settled in Maharashtra, which honours members who have achieved distinction in their fields and gathers the community through the year. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis, exported statically to GitHub Pages.
+A single-page site for the Rajasthan Bhushan Puraskar Samiti, Pune: a committee of people of Rajasthani origin settled in Maharashtra, which confers the Rajasthan Bhushan Puraskar on members who have achieved distinction in their fields and gathers the community through the year. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis, exported statically to GitHub Pages.
 
-> **Placeholder content.** The organisation name is the client's. Everything else (events, dates, venues, team roles, award categories, contact details, photographs) is placeholder copy written from the brief and must be confirmed or replaced by the Samaj before launch. No real person is named as a team member or award recipient anywhere on the site.
+> **Placeholder content.** The organisation name, taglines and medallion logo are the client's (taken from the 2026 award invitation). Everything else (events, dates, venues, team roles, award categories, contact details, photographs) is placeholder copy written from the brief and must be confirmed or replaced by the Samiti before launch. No real person is named as a team member or award recipient anywhere on the site.
 
 ## Run it
 
@@ -26,7 +26,7 @@ The navigation links are section anchors (`/#about`, `/#events`, `/#awards`, `/#
 
 ### Opening sequence
 
-`src/components/intro/GateIntro.tsx`: a fort wall with a cusped gateway rises against the dusk, an elephant and a camel walk in to flank it, the doors swing open on the greeting (पधारो म्हारे देस · Welcome to · Rajasthan Puraskar Samaj), then the camera passes through the gate into the hero. It plays once per browser session, has a **Skip intro** button, and never plays for `prefers-reduced-motion` or for deep links to a section. The silhouettes are free Wikimedia Commons SVGs (CC0 / public domain, noted in `silhouettes.ts`).
+`src/components/intro/GateIntro.tsx`: a fort wall with a cusped gateway rises against the dusk, an elephant and a camel walk in to flank it, the doors swing open on the medallion and the greeting (पधारो म्हारे देस · Welcome to · Rajasthan Bhushan Puraskar Samiti), then the camera passes through the gate into the hero. It plays once per browser session, has a **Skip intro** button, and never plays for `prefers-reduced-motion` or for deep links to a section. The silhouettes are free Wikimedia Commons SVGs (CC0 / public domain, noted in `silhouettes.ts`).
 
 ## Where things live
 
@@ -56,18 +56,18 @@ src/
 ## Editing content
 
 - **Team** — `about.ts` → `team.members`. Each entry has a `role`; add `name`, `blurb` and a `photo` once the person has confirmed. Cards without a name read "Name to be confirmed".
-- **Awards** — `awards.ts`: categories (with the Devanagari word shown above each title), eligibility points and the four-step process. Honourees are not listed until the Samaj confirms a real list.
+- **Awards** — `awards.ts`: categories (with the Devanagari word shown above each title), eligibility points and the four-step process. Honourees are not listed until the Samiti confirms a real list.
 - **Events** — `events.ts`. An event is **upcoming** until `endsAt` passes. Because the site is static, upcoming / past is decided at build time: push or re-run the workflow after an event to move it into the past. Venues are deliberately marked "to be confirmed". Set `registrationUrl` to send the primary CTA to a ticketing page; without it the CTA opens the contact form pre-filled.
 - **Contact** — `site.ts` → `contact` and `socials` (placeholders), `home.ts` → `contact.purposes` for the "reason for writing" options.
-- **Photos** — replace entries in `photos.ts` with the Samaj's own images (keep `alt` honest). The `/credits` page and footer link exist because the placeholders are Creative Commons; remove them once no CC images remain.
+- **Photos** — replace entries in `photos.ts` with the Samiti's own images (keep `alt` honest). The `/credits` page and footer link exist because the placeholders are Creative Commons; remove them once no CC images remain.
 
 ## Rebranding
 
 1. **Name & copy** — `src/content/site.ts`.
-2. **Logo** — set `site.logo.src` to an image, or edit the arch `Mark` in `src/components/ui/Logo.tsx` (`ArchDefs.tsx` holds the shared arch path).
+2. **Logo** — `public/brand/logo.png` is the Samiti medallion, cut out of the invitation artwork at 342 × 311 px with a transparent background; swap in the original vector / high-resolution file when the Samiti supplies it (keep the path or update `site.logo.src`, which is resolved through `asset()` so it works under a base path). It appears in the nav, the gate intro, the awards seal, the footer and as the favicon (`src/app/icon.png`, `apple-icon.png`). Unset `site.logo.src` to fall back to the arch mark in `ArchDefs.tsx`.
 3. **Colours** — the `:root` tokens at the top of `src/app/globals.css`. The site is white-first: `ink` is "the surface" and `bone` "the type", so stage sections are white with charcoal text, `theme-paper` sections are warm ivory, and anything that must stay dark (gate intro, hero, image overlays, footer, menus) adds the `theme-dark` class, which swaps the same tokens to the cinematic dark palette. `--color-ember` is the kesariya accent, `--color-gold` the metallic; `night` / `day` never change. The gate scene's sandstone palette is local to `GateIntro.tsx`.
 4. **Type** — `src/styles/fonts.ts`.
-5. **Favicon** — `src/app/icon.svg`. Add `public/og.jpg` for social previews.
+5. **Favicon** — `src/app/icon.png` and `apple-icon.png`, generated from the medallion. Add `public/og.jpg` for social previews.
 
 ## Deployment (GitHub Pages)
 

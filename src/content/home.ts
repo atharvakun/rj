@@ -14,7 +14,7 @@ export const home = {
   },
 
   hero: {
-    eyebrow: "A samaj of Rajasthanis in Maharashtra",
+    eyebrow: "Rajasthan Bhushan Puraskar Samiti · Pune",
     /** The last `emphasisWords` words are set in italic display type. */
     headline: "Honouring the Rajasthanis who made Maharashtra home.",
     emphasisWords: 2,
@@ -25,7 +25,7 @@ export const home = {
     image: photos.hero,
     /**
      * Optional ambient loop over the photograph. Supply `{ src, title, poster }`
-     * with the Samaj's own footage; left unset, the hero uses the still.
+     * with the Samiti's own footage; left unset, the hero uses the still.
      */
     video: undefined as VideoAsset | undefined,
   },
@@ -41,13 +41,13 @@ export const home = {
   },
 
   about: {
-    eyebrow: "About the Samaj",
+    eyebrow: "About the Samiti",
   },
 
   events: {
     eyebrow: "Upcoming events",
     comingSoonTitle: "The next gathering is taking shape.",
-    comingSoonBody: "Dates for the next Samaroh and festival gatherings will appear here. Leave your details and you will be the first to know.",
+    comingSoonBody: "Dates for the next Puraskar evening and festival gatherings will appear here. Leave your details and you will be the first to know.",
     alsoComing: "Also on the calendar",
     countdown: "Counting down",
     detailsCta: "Event details",
@@ -61,7 +61,7 @@ export const home = {
     /** Options for the “reason for writing” field; `nomination` is pre-selected from the awards links. */
     purposes: [
       { value: "nomination", label: "Nominate someone for the Puraskar" },
-      { value: "membership", label: "Join the Samaj" },
+      { value: "membership", label: "Join the Samiti" },
       { value: "event", label: "Attend or ask about an event" },
       { value: "volunteer", label: "Volunteer" },
       { value: "partner", label: "Partner or sponsor" },
@@ -77,7 +77,7 @@ export const home = {
       eyebrow: "Credits",
       title: "Photography",
       intro:
-        "The photographs on this site are temporary placeholders from Wikimedia Commons, used under the licences listed here, until the Samaj's own imagery replaces them.",
+        "The photographs on this site are temporary placeholders from Wikimedia Commons, used under the licences listed here, until the Samiti's own imagery replaces them.",
     },
   },
 } as const;

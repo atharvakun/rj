@@ -5,7 +5,7 @@ import { photos } from "./photos";
  * EVENTS
  * --------------------------------------------------------------------------
  * PLACEHOLDER PROGRAMME. Dates, venues and details below are illustrative and
- * must be confirmed by the Samaj before launch; venues are marked “to be
+ * must be confirmed by the Samiti before launch; venues are marked “to be
  * confirmed” on purpose. Dates are ISO 8601 with an explicit offset;
  * `timeZone` drives how they are displayed. Upcoming / past is decided at
  * build time, so redeploy after an event ends.
@@ -47,9 +47,9 @@ export const upcomingEvents: EventRecord[] = [
     ],
   },
   {
-    slug: "rajasthan-puraskar-samaroh-2027",
-    title: "Rajasthan Puraskar Samaroh 2027",
-    strapline: "The annual awards evening of the Samaj.",
+    slug: "rajasthan-bhushan-puraskar-2027",
+    title: "Rajasthan Bhushan Puraskar 2027",
+    strapline: "The annual awards evening of the Samiti.",
     category: "awards",
     startsAt: "2027-02-07T18:00:00+05:30",
     endsAt: "2027-02-07T21:30:00+05:30",
@@ -58,7 +58,7 @@ export const upcomingEvents: EventRecord[] = [
     summary:
       "One evening a year, the community gathers to honour its own: Rajasthanis who built lives in Maharashtra and achieved distinction in business, education, the arts, medicine, service and more.",
     body: [
-      "The Samaroh is the heart of the Samaj's year. Honourees in each category are felicitated on stage before their families, friends and the wider community, with a citation read for each.",
+      "The Samaroh is the heart of the Samiti's year. Honourees in each category are felicitated on stage before their families, friends and the wider community, with a citation read for each.",
       "The evening opens with folk music from Rajasthan and closes with dinner. Dress is festive; many guests wear traditional Rajasthani attire.",
       "Attendance is by invitation to members, honourees' guests and partners. If you would like to be there, register interest below and the office will be in touch.",
     ],
@@ -76,14 +76,14 @@ export const upcomingEvents: EventRecord[] = [
   {
     slug: "gangaur-utsav-2027",
     title: "Gangaur Utsav",
-    strapline: "Spring, Gauri and Isar, and the women of the Samaj leading the procession.",
+    strapline: "Spring, Gauri and Isar, and the women of the Samiti leading the procession.",
     category: "festival",
     startsAt: "2027-04-10T16:00:00+05:30",
     endsAt: "2027-04-10T21:00:00+05:30",
     timeZone: "Asia/Kolkata",
     venue: tbc("Mumbai", "Community grounds"),
     summary:
-      "Gangaur is Rajasthan's festival of spring and of marriage, carried by its women. The Samaj's Gangaur Utsav brings the procession, the songs and the ghoomar to Maharashtra for an evening.",
+      "Gangaur is Rajasthan's festival of spring and of marriage, carried by its women. The Samiti's Gangaur Utsav brings the procession, the songs and the ghoomar to Maharashtra for an evening.",
     body: [
       "Families bring their Gauri and Isar idols for a shared procession, followed by ghoomar, folk songs and a traditional meal.",
       "Children's and newcomers' corners explain the rituals for those who have grown up far from them. Everyone is welcome, Rajasthani or not.",
@@ -110,7 +110,7 @@ export const upcomingEvents: EventRecord[] = [
     summary:
       "A monsoon get-together for members and their families: swings under the trees, mehndi, ghewar, and Teej songs sung the way they are at home.",
     body: [
-      "Teej Milan is the Samaj's most relaxed evening of the year. Come in green, bring the children, and stay for the kavi sammelan after dinner.",
+      "Teej Milan is the Samiti's most relaxed evening of the year. Come in green, bring the children, and stay for the kavi sammelan after dinner.",
     ],
     cover: photos.wl_cover,
     gallery: [photos.dirUpcoming, photos.ln_g1, photos.ag_g3, photos.rr_g3],
@@ -135,9 +135,9 @@ export const pastEvents: EventRecord[] = [
     timeZone: "Asia/Kolkata",
     venue: tbc("Mumbai", "Auditorium"),
     summary:
-      "On 30 March the Samaj marked Rajasthan Diwas with an evening of Kathak and folk performance, a talk on the state's history and a Rajasthani dinner.",
+      "On 30 March the Samiti marked Rajasthan Diwas with an evening of Kathak and folk performance, a talk on the state's history and a Rajasthani dinner.",
     body: [
-      "Rajasthan Diwas commemorates the formation of the state in 1949. The Samaj's evening paired classical and folk dance with a short talk on how Rajasthani families came to Maharashtra, and why they stayed.",
+      "Rajasthan Diwas commemorates the formation of the state in 1949. The Samiti's evening paired classical and folk dance with a short talk on how Rajasthani families came to Maharashtra, and why they stayed.",
     ],
     cover: photos.ln_cover,
     gallery: [photos.ln_g3, photos.ln_g4, photos.ln_g5, photos.ln_g6, photos.ns_cover, photos.ns_g1],
@@ -166,7 +166,7 @@ export const pastEvents: EventRecord[] = [
   {
     slug: "diwali-sneh-milan-2025",
     title: "Diwali Sneh Milan 2025",
-    strapline: "Lamps, rangoli and a first gathering of the Samaj.",
+    strapline: "Lamps, rangoli and a first gathering of the Samiti.",
     category: "community",
     startsAt: "2025-10-25T18:00:00+05:30",
     endsAt: "2025-10-25T21:30:00+05:30",

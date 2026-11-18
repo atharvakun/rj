@@ -114,13 +114,13 @@ export function Navigation() {
     return pathname === href || pathname.startsWith(href + "/");
   };
   const condensed = scrolled && !open;
+  // Pages that open on a full-bleed dark hero get light nav text until the bar condenses.
+  const darkOpening = pathname === "/" || pathname.startsWith("/events/");
   const menuItems = [{ label: "Home", href: "/" }, ...site.nav];
 
   return (
     <>
-      {/* The blend must live on the fixed element itself: a fixed header is an
-          isolated group, so a blended descendant would only blend with the header. */}
-      <header ref={header} className={cn("fixed inset-x-0 top-0 z-[70]", !condensed && "theme-dark mix-blend-difference")}>
+      <header ref={header} className={cn("fixed inset-x-0 top-0 z-[70]", !condensed && darkOpening && "theme-dark")}>
         <div
           className={cn(
             "transition-[background-color,border-color,backdrop-filter] duration-500",

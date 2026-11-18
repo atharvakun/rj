@@ -14,7 +14,7 @@ export function Footer() {
       <div className="container-x relative flex min-h-[70vh] flex-col justify-between overflow-hidden pb-6 pt-16 md:min-h-[80vh]">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Mark className="h-6 text-ember" />
+            <Mark className="h-16" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ash">{site.description}</p>
           </div>
           <div className="md:col-span-7">
@@ -83,7 +83,7 @@ export function Footer() {
                 Photo credits
               </TransitionLink>
             </p>
-            <p className="font-mono">{site.descriptor}</p>
+            <p className="font-mono">{site.motto}</p>
           </div>
         </div>
       </div>

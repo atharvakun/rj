@@ -2,9 +2,9 @@ import type { TeamMember } from "./types";
 import { photos } from "./photos";
 
 /**
- * ABOUT THE SAMAJ
+ * ABOUT THE SAMITI
  * --------------------------------------------------------------------------
- * PLACEHOLDER copy, written from the brief, for the Samaj to correct. Team
+ * PLACEHOLDER copy, written from the brief, for the Samiti to correct. Team
  * names are deliberately left unconfirmed: no real person is named here until
  * the office-bearers approve it. Imagery from `photos.ts`.
  */
@@ -15,7 +15,7 @@ export const about = {
 
   who: {
     title: "Who we are",
-    body: "Rajasthan Puraskar Samaj is a community organisation formed by Rajasthanis settled across Maharashtra. It began with a simple thought: the achievements of our people here deserve to be recognised, first of all, by their own community.",
+    body: "Rajasthan Bhushan Puraskar Samiti is a committee formed in Pune by Rajasthanis settled across Maharashtra. It began with a simple thought: the achievements of our people here deserve to be recognised, first of all, by their own community.",
   },
   mission: {
     title: "What we do",
@@ -39,11 +39,11 @@ export const about = {
 
   team: {
     eyebrow: "The team",
-    title: "The people behind the Samaj",
-    note: "Office-bearers and committee members will be named here once confirmed by the Samaj.",
+    title: "The people behind the Samiti",
+    note: "Office-bearers and committee members will be named here once confirmed by the Samiti.",
     /** `name` left undefined renders a “to be confirmed” card. Add `photo` to show a portrait. */
     members: [
-      { role: "President", blurb: "Leads the Samaj and chairs the general body." },
+      { role: "President", blurb: "Leads the Samiti and chairs the general body." },
       { role: "Vice President", blurb: "Stands in for the President and leads outreach." },
       { role: "General Secretary", blurb: "Runs the office, the calendar and correspondence." },
       { role: "Treasurer", blurb: "Keeps the accounts and publishes them to members." },

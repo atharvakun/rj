@@ -7,6 +7,7 @@ import { home } from "@/content/home";
 import { useIntro } from "@/components/layout/IntroProvider";
 import { useLenis } from "@/components/layout/SmoothScroll";
 import { ARCH_PATH, archClip } from "@/components/ui/ArchDefs";
+import { Mark } from "@/components/ui/Logo";
 import { silhouettes } from "./silhouettes";
 
 /* Scene palette: sandstone fort against a dusk sky. Local to the intro. */
@@ -94,7 +95,8 @@ export function GateIntro() {
         // Doors swing inward.
         .fromTo(q("[data-door=left]"), { rotationY: 0 }, { rotationY: -108, duration: 1.8, ease: "power3.inOut" }, 1.6)
         .fromTo(q("[data-door=right]"), { rotationY: 0 }, { rotationY: 108, duration: 1.8, ease: "power3.inOut" }, 1.6)
-        // The greeting rises line by line behind them.
+        // The medallion settles in, then the greeting rises line by line behind them.
+        .fromTo(q("[data-seal]"), { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.3, ease: "expo.out" }, 2.1)
         .fromTo(q("[data-line] > span"), { yPercent: 120 }, { yPercent: 0, duration: 1.1, stagger: 0.16 }, 2.3)
         .fromTo(q("[data-rule]"), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.inOut" }, 2.8)
         // Pass through the gate: the page starts its own entrance underneath.
@@ -194,7 +196,10 @@ export function GateIntro() {
             <div data-interior className="absolute inset-0 bg-ink" />
 
             {/* Greeting */}
-            <div data-text className="absolute inset-0 flex flex-col items-center justify-center px-6 pb-[6vh] text-center md:pb-0">
+            <div data-text className="absolute inset-0 flex flex-col items-center justify-center px-6 pb-[6vh] text-center md:pb-[10vh]">
+              <div data-seal className="mb-4 md:mb-6">
+                <Mark className="h-[clamp(64px,12vh,150px)] drop-shadow-[0_8px_30px_rgba(212,162,76,0.35)]" priority />
+              </div>
               <p data-line className="overflow-hidden pb-[0.15em]">
                 <span className="block font-devanagari text-[clamp(1.6rem,5vw,3.4rem)] leading-tight text-gold">{site.greeting.native}</span>
               </p>

@@ -1,9 +1,9 @@
 /**
  * THE PURASKAR (AWARDS)
  * --------------------------------------------------------------------------
- * PLACEHOLDER structure for the Samaj to confirm: categories, eligibility and
+ * PLACEHOLDER structure for the Samiti to confirm: categories, eligibility and
  * process. No honourees are listed: nobody is named as an award recipient
- * until the Samaj confirms a real list.
+ * until the Samiti confirms a real list.
  */
 export type AwardCategory = {
   key: string;
@@ -17,7 +17,7 @@ export const awards = {
   eyebrow: "The Puraskar",
   title: "Recognition from one's own people.",
   intro:
-    "The Rajasthan Puraskar honours people of Rajasthani origin who have settled in Maharashtra and achieved distinction in their field. Anyone may nominate. Honourees are chosen by a jury of the Samaj and felicitated at the annual Puraskar Samaroh.",
+    "The Rajasthan Bhushan Puraskar honours people of Rajasthani origin who have settled in Maharashtra and achieved distinction in their field. Anyone may nominate. Honourees are chosen by a jury of the Samiti and felicitated at the annual Rajasthan Bhushan Puraskar evening.",
 
   categories: [
     {
@@ -78,15 +78,15 @@ export const awards = {
     title: "How it works",
     steps: [
       { step: "Nominate", body: "Send a short note about the person, their work and why it matters, using the form below." },
-      { step: "Review", body: "A jury drawn from the Samaj considers every nomination against the same published criteria." },
+      { step: "Review", body: "A jury drawn from the Samiti considers every nomination against the same published criteria." },
       { step: "Announce", body: "Honourees are told privately first, then announced to the community." },
-      { step: "Samaroh", body: "Awards are presented at the annual Puraskar Samaroh, before family, friends and the whole samaj." },
+      { step: "Samaroh", body: "Awards are presented at the annual Rajasthan Bhushan Puraskar evening, before family, friends and the whole community." },
     ],
   },
 
   honourees: {
     eyebrow: "Honourees",
-    note: "The first honourees will be announced after the inaugural Samaroh and listed here with their permission.",
+    note: "The first honourees will be announced after the first Puraskar evening and listed here with their permission.",
   },
 
   cta: { label: "Nominate someone", href: "/?purpose=nomination#contact" },

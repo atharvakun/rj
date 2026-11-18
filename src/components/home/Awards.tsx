@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Stagger } from "@/components/motion/Stagger";
-import { ArchOutline } from "@/components/ui/ArchDefs";
+import { Mark } from "@/components/ui/Logo";
 
 /** The Puraskar: categories, who can be nominated, how it works. */
 export function Awards() {
@@ -96,20 +96,23 @@ export function Awards() {
   );
 }
 
-/** Rotating circular text with the arch mark at its centre. Decorative. */
+/** Rotating circular text around the Samiti medallion. Decorative. */
 function Seal() {
-  const text = `${site.name} · Maharashtra · `.toUpperCase();
+  const text = `${site.name} · Pune · `.toUpperCase();
+  const circumference = 2 * Math.PI * 48;
   return (
-    <span className="relative inline-flex h-28 w-28 items-center justify-center text-ink" aria-hidden>
+    <span className="relative inline-flex h-32 w-32 items-center justify-center text-ink" aria-hidden>
       <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full animate-[rotate-slow_28s_linear_infinite]">
         <defs>
           <path id="seal-circle" d="M60,60 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0" />
         </defs>
-        <text className="fill-current font-mono text-[8.2px] tracking-[0.2em]">
-          <textPath href="#seal-circle">{text}</textPath>
+        <text className="fill-current font-mono text-[7.8px]">
+          <textPath href="#seal-circle" textLength={circumference} lengthAdjust="spacing">
+            {text}
+          </textPath>
         </text>
       </svg>
-      <ArchOutline className="h-10 w-10 text-ember-deep" strokeWidth={1.5} />
+      <Mark className="h-14" />
     </span>
   );
 }

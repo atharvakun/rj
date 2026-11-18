@@ -53,7 +53,7 @@ export function PhotoStrip() {
           </TextReveal>
         </div>
         <p className="max-w-xs text-sm leading-relaxed text-ash">
-          Placeholder photographs from Rajasthan and its celebrations, until the Samaj&apos;s own.{" "}
+          Placeholder photographs from Rajasthan and its celebrations, until the Samiti&apos;s own.{" "}
           <TransitionLink href="/credits" className="link-line text-bone/70">
             Credits
           </TransitionLink>
