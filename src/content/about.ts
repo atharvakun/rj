@@ -1,9 +1,7 @@
-import type { ImageAsset, TeamMember } from "./types";
+import type { TeamMember } from "./types";
+import { photos } from "./photos";
 
-const photo = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=1800`;
-
-/** PLACEHOLDER copy and team. */
+/** PLACEHOLDER copy and team. Imagery from `photos.ts`. */
 export const about = {
   /** Scroll-highlighted manifesto. Keep it to two or three sentences. */
   manifesto:
@@ -32,19 +30,9 @@ export const about = {
   },
 
   images: {
-    primary: {
-      src: photo("1549451371-64aa98a6f660"),
-      alt: "Warm stage lights over a festival crowd",
-      position: "50% 40%",
-    } as ImageAsset,
-    secondary: {
-      src: photo("1511379938547-c1f69419868d"),
-      alt: "Guitars and instruments in a sunlit studio",
-    } as ImageAsset,
-    tertiary: {
-      src: photo("1485872299829-c673f5194813"),
-      alt: "Hands holding drinks together in a crowd",
-    } as ImageAsset,
+    primary: photos.aboutPrimary,
+    secondary: photos.aboutSecondary,
+    tertiary: photos.aboutTertiary,
   },
 
   team: [

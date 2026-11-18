@@ -1,10 +1,10 @@
-import type { ImageAsset, VideoAsset } from "./types";
-
-const photo = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=1200`;
+import type { VideoAsset } from "./types";
+import { photos } from "./photos";
 
 /**
  * SITE COPY & MEDIA — placeholder content, edit freely.
  * Keyed by page / section. Each top-level page reads its header copy from `pages`.
+ * Imagery comes from `photos.ts` (temporary, credited placeholders).
  */
 export const home = {
   hero: {
@@ -15,20 +15,12 @@ export const home = {
     intro:
       "We design and produce festivals, performances and celebrations that bring people together, and stay with them long after the lights go down.",
     cta: { label: "Explore experiences", href: "/events" },
-    image: {
-      src: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=2000",
-      alt: "Festival crowd facing a stage bathed in warm orange light",
-      position: "50% 45%",
-    } as ImageAsset,
-    /** Optional ambient loop. Remove `video` to use the photograph alone. */
-    video: {
-      src: "https://videos.pexels.com/video-files/2022395/2022395-hd_1920_1080_30fps.mp4",
-      title: "Ambient festival footage",
-      poster: {
-        src: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=2000",
-        alt: "Festival crowd facing a stage bathed in warm orange light",
-      },
-    } as VideoAsset | undefined,
+    image: photos.hero,
+    /**
+     * Optional ambient loop over the photograph. Supply `{ src, title, poster }`
+     * with the organisation's own footage; left unset, the hero uses the still.
+     */
+    video: undefined as VideoAsset | undefined,
   },
 
   /** Home: compact teaser for the next event. */
@@ -48,36 +40,11 @@ export const home = {
     eyebrow: "Explore",
     title: "Find your way around.",
     items: [
-      {
-        href: "/upcoming",
-        title: "Upcoming",
-        blurb: "Dates, venues and a live countdown to the next gathering.",
-        image: { src: photo("1501281668745-f7f57925c3b4"), alt: "Hands raised in a crowd under stage light" } as ImageAsset,
-      },
-      {
-        href: "/events",
-        title: "Experiences",
-        blurb: "A cinematic archive of festivals, concerts and small rituals.",
-        image: { src: photo("1468234847176-28606331216a"), alt: "Stage lights sweeping over a concert audience" } as ImageAsset,
-      },
-      {
-        href: "/about",
-        title: "About",
-        blurb: "Who we are, what we believe and the people behind the work.",
-        image: { src: photo("1523580494863-6f3031224c94"), alt: "People gathered at an outdoor evening event" } as ImageAsset,
-      },
-      {
-        href: "/testimonials",
-        title: "Testimonials",
-        blurb: "What audiences, artists and partners said afterwards.",
-        image: { src: photo("1511578314322-379afb476865"), alt: "Festival crowd at dusk with lights overhead" } as ImageAsset,
-      },
-      {
-        href: "/contact",
-        title: "Contact",
-        blurb: "Commission a festival, a programme or a celebration.",
-        image: { src: photo("1504609813442-a8924e83f76e"), alt: "Confetti falling over a crowd at night" } as ImageAsset,
-      },
+      { href: "/upcoming", title: "Upcoming", blurb: "Dates, venues and a live countdown to the next gathering.", image: photos.dirUpcoming },
+      { href: "/events", title: "Experiences", blurb: "A cinematic archive of festivals, concerts and small rituals.", image: photos.dirEvents },
+      { href: "/about", title: "About", blurb: "Who we are, what we believe and the people behind the work.", image: photos.dirAbout },
+      { href: "/testimonials", title: "Testimonials", blurb: "What audiences, artists and partners said afterwards.", image: photos.dirTestimonials },
+      { href: "/contact", title: "Contact", blurb: "Commission a festival, a programme or a celebration.", image: photos.dirContact },
     ],
   },
 
@@ -101,6 +68,11 @@ export const home = {
       eyebrow: "Testimonials",
       title: "What they said afterwards.",
       intro: "Words from audiences, artists, venues and partners. Placeholder quotes until real, permissioned ones replace them.",
+    },
+    credits: {
+      eyebrow: "Credits",
+      title: "Photography",
+      intro: "The photographs on this site are temporary placeholders from Wikimedia Commons, used under the licences listed here, until the organisation's own imagery replaces them.",
     },
   },
 

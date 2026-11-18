@@ -18,8 +18,9 @@ const nextConfig: NextConfig = {
     // sized through the Unsplash URL parameters.
     unoptimized: true,
     remotePatterns: [
-      // Temporary photography source. Replace with your own CDN / asset host.
-      { protocol: "https", hostname: "images.unsplash.com" },
+      // Temporary photography source (see src/content/photos.ts). Replace with your own CDN / asset host.
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+      { protocol: "https", hostname: "thumb.wikimedia.org" },
     ],
   },
   turbopack: {

@@ -1,4 +1,5 @@
 import type { Testimonial } from "./types";
+import { photos } from "./photos";
 
 /** PLACEHOLDER testimonials. Replace with real, permissioned quotes. */
 export const testimonials: Testimonial[] = [
@@ -15,10 +16,7 @@ export const testimonials: Testimonial[] = [
     name: "Placeholder client",
     role: "Head of Culture, placeholder company",
     kind: "client",
-    photo: {
-      src: "https://images.unsplash.com/photo-1543965170-4c01a586684e?auto=format&fit=crop&q=80&w=800",
-      alt: "Portrait of a person in soft evening light",
-    },
+    photo: photos.testimonialClient,
   },
   {
     quote:

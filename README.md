@@ -13,7 +13,7 @@ npm run build      # production build
 npm start
 ```
 
-Node 20+ recommended. Fonts load from Google Fonts at build time; temporary photography loads from Unsplash and sample clips from Pexels (both allow-listed in `next.config.ts`).
+Node 20+ recommended. Fonts load from Google Fonts at build time; temporary photography loads from Wikimedia Commons (credited on `/credits`, sourced in `src/content/photos.ts`) and sample clips from Pexels.
 
 ## Where things live
 

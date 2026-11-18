@@ -78,7 +78,10 @@ export function Footer() {
           </p>
           <div className="mt-6 flex flex-col gap-2 border-t border-smoke pt-5 text-xs text-ash sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {year} {site.name}. {site.legal}
+              © {year} {site.name}. {site.legal}{" "}
+              <TransitionLink href="/credits" className="link-line">
+                Photo credits
+              </TransitionLink>
             </p>
             <p className="font-mono">{site.descriptor}</p>
           </div>

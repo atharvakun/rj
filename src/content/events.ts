@@ -1,4 +1,5 @@
 import type { EventRecord } from "./types";
+import { photos } from "./photos";
 
 /**
  * EVENTS
@@ -7,13 +8,12 @@ import type { EventRecord } from "./types";
  * below with the organisation's actual programme. Dates are ISO 8601 with an
  * explicit offset; `timeZone` drives how they are displayed.
  *
- * Imagery is temporary (Unsplash). Swap `src` for client photography; every
- * component uses `object-fit: cover` with the `position` hint, so any aspect
- * ratio works.
+ * Imagery is temporary (see `photos.ts` for sources and credits). Swap each
+ * reference for client photography; every component uses `object-fit: cover`
+ * with the `position` hint, so any aspect ratio works. Video clips are generic
+ * placeholder footage from Pexels.
  */
 
-const photo = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=80&w=1800`;
 const clip = (id: string, fps = 25) =>
   `https://videos.pexels.com/video-files/${id}/${id}-hd_1920_1080_${fps}fps.mp4`;
 
@@ -40,16 +40,8 @@ export const upcomingEvents: EventRecord[] = [
       "This edition brings an open-air main stage, a tented second stage for intimate sets and a kilometre-long lantern walk designed with local craftspeople. Food comes from twenty independent kitchens; the bar pours regional producers only.",
       "Day tickets and three-night passes are both available. Children under twelve enter free with a ticket-holding adult.",
     ],
-    cover: {
-      src: photo("1549451371-64aa98a6f660"),
-      alt: "Festival crowd under warm orange stage lights at night",
-      position: "50% 40%",
-    },
-    poster: {
-      src: photo("1524368535928-5b5e00ddc76b"),
-      alt: "Crowd silhouettes in front of a brightly lit outdoor stage",
-      position: "50% 50%",
-    },
+    cover: photos.wl_cover,
+    poster: photos.wl_poster,
     gallery: [],
     videos: [],
     memories: [],
@@ -80,11 +72,7 @@ export const upcomingEvents: EventRecord[] = [
       "Open Studio Weekend turns a former mill into a working village of studios. Visitors move between rooms where makers are mid-process: ink still wet, kilns still warm.",
       "Short talks run on the hour. A long communal lunch is served both days, cooked by a rotating group of home cooks.",
     ],
-    cover: {
-      src: photo("1544928147-79a2dbc1f389"),
-      alt: "Group of people working together at a long craft table seen from above",
-      position: "50% 50%",
-    },
+    cover: photos.os_cover,
     gallery: [],
     videos: [],
     memories: [],
@@ -112,24 +100,13 @@ export const pastEvents: EventRecord[] = [
       "Monsoon Sound was designed around weather most festivals avoid. Stages were built under sailcloth, walkways were raised and the whole site was lit to look its best when wet.",
       "Across three days, forty-two acts played to an audience that arrived in raincoats and left barefoot. The final night closed with a brass band leading the crowd down to the beach.",
     ],
-    cover: {
-      src: photo("1506157786151-b8491531f063"),
-      alt: "Festival crowd with raised hands facing a violet-lit main stage",
-      position: "50% 45%",
-    },
-    gallery: [
-      { src: photo("1514525253161-7a46d19cd819"), alt: "Lasers and confetti over a packed festival crowd" },
-      { src: photo("1459749411175-04bf5292ceea"), alt: "Crowd silhouettes against golden stage lights" },
-      { src: photo("1563841930606-67e2bce48b78"), alt: "Blue-lit stage structure at dusk" },
-      { src: photo("1540039155733-5bb30b53aa14"), alt: "Audience with raised arms in warm stage haze" },
-      { src: photo("1492684223066-81342ee5ff30"), alt: "Confetti falling over a night-time crowd" },
-      { src: photo("1514533212735-5df27d970db0"), alt: "Large LED screen behind a dancing crowd" },
-    ],
+    cover: photos.ms_cover,
+    gallery: [photos.ms_g1, photos.ms_g2, photos.ms_g3, photos.ms_g4, photos.ms_g5, photos.ms_g6],
     videos: [
       {
         title: "Main stage, night two",
         src: clip("2022395", 30),
-        poster: { src: photo("1533174072545-7a4b6ad7a6c3"), alt: "Crowd beneath falling lights" },
+        poster: photos.ms_v,
         duration: "0:28",
       },
     ],
@@ -158,24 +135,13 @@ export const pastEvents: EventRecord[] = [
       "The Long Night of Dance placed a corps de ballet and a breaking crew within a hundred metres of each other and let the audience decide where to stand.",
       "Twenty-six companies performed across five stages. A single, continuous soundtrack was composed to bridge the gaps between them, so the night never fell silent.",
     ],
-    cover: {
-      src: photo("1508807526345-15e9b5f4eaff"),
-      alt: "Ballet dancers in white tutus mid-performance on a dark stage",
-      position: "50% 30%",
-    },
-    gallery: [
-      { src: photo("1547153760-18fc86324498"), alt: "Dancer in yellow mid-leap against a grey backdrop" },
-      { src: photo("1503095396549-807759245b35"), alt: "Silhouetted figures in front of a red curtain" },
-      { src: photo("1540575467063-178a50c2df87"), alt: "Audience watching a performance in low light" },
-      { src: photo("1540324155974-7523202daa3f"), alt: "Dancer arching back on a pier at sunset" },
-      { src: photo("1507838153414-b4b713384a76"), alt: "Close-up of an open musical score" },
-      { src: photo("1514320291840-2e0a9bf2a9ae"), alt: "Empty stage with a single spotlight and drum kit" },
-    ],
+    cover: photos.ln_cover,
+    gallery: [photos.ln_g1, photos.ln_g2, photos.ln_g3, photos.ln_g4, photos.ln_g5, photos.ln_g6],
     videos: [
       {
         title: "Rehearsal, the warehouse stage",
         src: clip("2795745"),
-        poster: { src: photo("1478147427282-58a87a120781"), alt: "Hands raised in a dark room" },
+        poster: photos.ln_v,
         duration: "0:19",
       },
     ],
@@ -204,24 +170,13 @@ export const pastEvents: EventRecord[] = [
       "Rooftop Ramble asked a simple question: what if a festival had no site? Eleven buildings agreed to host, and a walking route stitched them together.",
       "Each roof held something different: a string quartet, a supper for sixty, a poetry open mic, a children's workshop. Visitors moved on foot and met neighbours they had never spoken to.",
     ],
-    cover: {
-      src: photo("1517457373958-b7bdd4587205"),
-      alt: "Crowd on a rooftop under string lights at dusk",
-      position: "50% 50%",
-    },
-    gallery: [
-      { src: photo("1485872299829-c673f5194813"), alt: "Hands holding drinks in a crowd" },
-      { src: photo("1472653431158-6364773b2a56"), alt: "Friends watching a garden stage" },
-      { src: photo("1511988617509-a57c8a288659"), alt: "Four friends dancing in warm afternoon light" },
-      { src: photo("1531058020387-3be344556be6"), alt: "Crowd gathered in a bright hall" },
-      { src: photo("1527529482837-4698179dc6ce"), alt: "Guests raising glasses at a long dinner table" },
-      { src: photo("1515169067868-5387ec356754"), alt: "People talking around a table at a small gathering" },
-    ],
+    cover: photos.rr_cover,
+    gallery: [photos.rr_g1, photos.rr_g2, photos.rr_g3, photos.rr_g4, photos.rr_g5, photos.rr_g6],
     videos: [
       {
         title: "Dust and light, roof seven",
         src: clip("3045163"),
-        poster: { src: photo("1519750783826-e2420f4d687f"), alt: "Soft bokeh lights" },
+        poster: photos.rr_v,
         duration: "0:15",
       },
     ],
@@ -249,24 +204,13 @@ export const pastEvents: EventRecord[] = [
       "Night Signal removed the poster. Ticket buyers knew the venue, the date and the promise of seven acts. Nothing else.",
       "The format rewarded trust. Sets ran back to back on a revolving stage, and the loudest reaction of the night went to an unsigned trio playing their fourth show.",
     ],
-    cover: {
-      src: photo("1501386761578-eac5c94b800a"),
-      alt: "Joyful crowd faces lit from the stage at a concert",
-      position: "50% 35%",
-    },
-    gallery: [
-      { src: photo("1499364615650-ec38552f4f34"), alt: "Band on stage under sweeping blue lights" },
-      { src: photo("1526478806334-5fd488fcaabc"), alt: "Guitarist silhouetted in orange haze" },
-      { src: photo("1598387993441-a364f854c3e1"), alt: "Guitarist mid-song in teal and amber light" },
-      { src: photo("1516450360452-9312f5e86fc7"), alt: "Crowd in pink light facing a stage" },
-      { src: photo("1504680177321-2e6a879aac86"), alt: "DJ booth seen from the back of a dark hall" },
-      { src: photo("1475721027785-f74eccf877e2"), alt: "Microphone in front of a blurred crowd" },
-    ],
+    cover: photos.ns_cover,
+    gallery: [photos.ns_g1, photos.ns_g2, photos.ns_g3, photos.ns_g4, photos.ns_g5, photos.ns_g6],
     videos: [
       {
         title: "Set four",
         src: clip("2022396", 30),
-        poster: { src: photo("1545128485-c400e7702796"), alt: "Crowd in deep red light" },
+        poster: photos.ns_v,
         duration: "0:22",
       },
     ],
@@ -294,24 +238,13 @@ export const pastEvents: EventRecord[] = [
       "Blue Hour Sessions was built around a single table and a single stage. Guests ate together, then turned their chairs.",
       "Nine ensembles played across the three nights. The menu changed to match the music: a Konkani supper for the coastal quartet, a Punjabi feast for the brass night.",
     ],
-    cover: {
-      src: photo("1511192336575-5a79af67a629"),
-      alt: "Close-up of hands playing a brass trumpet",
-      position: "50% 50%",
-    },
-    gallery: [
-      { src: photo("1470019693664-1d202d2c0907"), alt: "Hands on an upright piano in black and white" },
-      { src: photo("1516280440614-37939bbacd81"), alt: "Microphone in warm low light" },
-      { src: photo("1552566626-52f8b828add9"), alt: "Restaurant interior with warm lamps" },
-      { src: photo("1519225421980-715cb0215aed"), alt: "Long dinner table set with flowers" },
-      { src: photo("1518972559570-7cc1309f3229"), alt: "Mixing console with glowing faders" },
-      { src: photo("1429962714451-bb934ecdc4ec"), alt: "Audience making heart shapes with their hands" },
-    ],
+    cover: photos.bh_cover,
+    gallery: [photos.bh_g1, photos.bh_g2, photos.bh_g3, photos.bh_g4, photos.bh_g5, photos.bh_g6],
     videos: [
       {
         title: "Ink and brass, visual interlude",
         src: clip("1943483"),
-        poster: { src: photo("1521334884684-d80222895322"), alt: "Soft coloured light" },
+        poster: photos.bh_v,
         duration: "0:17",
       },
     ],
@@ -340,24 +273,13 @@ export const pastEvents: EventRecord[] = [
       "Afterglow was a one-night transformation. A functioning distribution warehouse became three rooms of sound, each with its own light language.",
       "The main room ran a tunnel of programmable tube lighting designed with a local studio. By morning the floor was clear and the forklifts were back.",
     ],
-    cover: {
-      src: photo("1496337589254-7e19d01cec44"),
-      alt: "DJ performing in front of a crowd under smoke and purple light",
-      position: "50% 40%",
-    },
-    gallery: [
-      { src: photo("1470225620780-dba8ba36b745"), alt: "Hands on DJ decks in violet light" },
-      { src: photo("1566737236500-c8ac43014a67"), alt: "Tunnel of magenta light tubes above a crowd" },
-      { src: photo("1574391884720-bbc3740c59d1"), alt: "Silhouettes walking through a hazy club" },
-      { src: photo("1545128485-c400e7702796"), alt: "Crowd in deep red light" },
-      { src: photo("1505236858219-8359eb29e329"), alt: "Confetti over a packed dance floor" },
-      { src: photo("1522158637959-30385a09e0da"), alt: "Beams of white light over a crowd in black and white" },
-    ],
+    cover: photos.ag_cover,
+    gallery: [photos.ag_g1, photos.ag_g2, photos.ag_g3, photos.ag_g4, photos.ag_g5, photos.ag_g6],
     videos: [
       {
         title: "Room one, visual system",
         src: clip("3163534", 30),
-        poster: { src: photo("1566737236500-c8ac43014a67"), alt: "Light tunnel" },
+        poster: photos.ag_v,
         duration: "0:12",
       },
     ],
@@ -385,24 +307,13 @@ export const pastEvents: EventRecord[] = [
       "Open Frame inverted the gallery. Visitors arrived to empty walls on day one and watched them fill, speaking to the artists as they worked.",
       "Evenings carried talks and a small film programme projected onto the unfinished work. The closing night drew the largest single-day attendance in the venue's recent history.",
     ],
-    cover: {
-      src: photo("1536924940846-227afb31e2a5"),
-      alt: "Thick blue and orange paint strokes on a canvas",
-      position: "50% 50%",
-    },
-    gallery: [
-      { src: photo("1513364776144-60967b0f800f"), alt: "Paintbrush loaded with red paint" },
-      { src: photo("1508997449629-303059a039c0"), alt: "Visitors inside a grand hall with market stalls" },
-      { src: photo("1560439514-4e9645039924"), alt: "Dense crowd in a hall seen from above" },
-      { src: photo("1535016120720-40c646be5580"), alt: "Projector beam in a red room" },
-      { src: photo("1508700115892-45ecd05ae2ad"), alt: "Neon sign on a brick wall" },
-      { src: photo("1505373877841-8d25f7d46678"), alt: "Audience watching a presentation in a hall" },
-    ],
+    cover: photos.of_cover,
+    gallery: [photos.of_g1, photos.of_g2, photos.of_g3, photos.of_g4, photos.of_g5, photos.of_g6],
     videos: [
       {
         title: "Closing night projection",
         src: clip("1943483"),
-        poster: { src: photo("1535016120720-40c646be5580"), alt: "Projector beam" },
+        poster: photos.of_v,
         duration: "0:17",
       },
     ],
@@ -430,24 +341,13 @@ export const pastEvents: EventRecord[] = [
       "First Light began before dawn. A thousand people walked up the ridge in the dark, guided by lanterns, and waited together for the sun.",
       "Two choirs sang as the light came, followed by a single ambient set as the city woke below. Breakfast was served from the back of three trucks.",
     ],
-    cover: {
-      src: photo("1533174072545-7a4b6ad7a6c3"),
-      alt: "Crowd beneath a shower of falling light",
-      position: "50% 50%",
-    },
-    gallery: [
-      { src: photo("1493225457124-a3eb161ffa5f"), alt: "Performer raising a hand in smoke and light" },
-      { src: photo("1478147427282-58a87a120781"), alt: "Hands raised in a dark room" },
-      { src: photo("1464207687429-7505649dae38"), alt: "Group watching a sunrise from a hilltop" },
-      { src: photo("1524601500432-1e1a4c71d692"), alt: "Friends making heart shapes in a field" },
-      { src: photo("1513151233558-d860c5398176"), alt: "Confetti against a turquoise background" },
-      { src: photo("1530103862676-de8c9debad1d"), alt: "Colourful balloons" },
-    ],
+    cover: photos.fl_cover,
+    gallery: [photos.fl_g1, photos.fl_g2, photos.fl_g3, photos.fl_g4, photos.fl_g5, photos.fl_g6],
     videos: [
       {
         title: "Sunrise set",
         src: clip("2022395", 30),
-        poster: { src: photo("1464207687429-7505649dae38"), alt: "Hilltop sunrise" },
+        poster: photos.fl_v,
         duration: "0:28",
       },
     ],
