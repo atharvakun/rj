@@ -81,7 +81,7 @@ export function PhotoStrip() {
                     className="object-cover"
                     style={{ objectPosition: img.position ?? "50% 50%" }}
                   />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-3 pb-2.5 pt-8">
+                  <figcaption className="theme-dark absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent px-3 pb-2.5 pt-8">
                     <span className="eyebrow block truncate text-[0.6rem] text-bone/85">{img.alt}</span>
                   </figcaption>
                 </figure>

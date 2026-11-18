@@ -49,11 +49,11 @@ export function VideoHighlights({ videos }: { videos: VideoAsset[] }) {
                 aria-label={`Play ${v.title}`}
               >
                 <RevealImage image={v.poster} sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-video w-full" hoverZoom parallax={0.1}>
-                  <span className="absolute inset-0 bg-ink/20 transition-colors duration-700 group-hover:bg-ink/10" />
-                  <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bone/60 bg-ink/30 backdrop-blur-sm transition-transform duration-700 ease-out-expo group-hover:scale-110 md:h-24 md:w-24">
+                  <span className="theme-dark absolute inset-0 bg-ink/20 transition-colors duration-700 group-hover:bg-ink/10" />
+                  <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center theme-dark rounded-full border border-bone/60 bg-ink/30 backdrop-blur-sm transition-transform duration-700 ease-out-expo group-hover:scale-110 md:h-24 md:w-24">
                     <Play className="ml-1 h-6 w-6 fill-bone text-bone" strokeWidth={1} />
                   </span>
-                  {v.duration && <span className="absolute bottom-4 right-4 font-mono text-xs text-bone">{v.duration}</span>}
+                  {v.duration && <span className="absolute bottom-4 right-4 theme-dark font-mono text-xs text-bone">{v.duration}</span>}
                 </RevealImage>
                 <span className="mt-4 block font-display text-display-sm">{v.title}</span>
               </button>
@@ -69,7 +69,7 @@ export function VideoHighlights({ videos }: { videos: VideoAsset[] }) {
             aria-modal="true"
             aria-label={active.title}
             data-lenis-prevent
-            className="fixed inset-0 z-[85] flex items-center justify-center bg-ink/95 p-4 md:p-12"
+            className="theme-dark fixed inset-0 z-[85] flex items-center justify-center bg-ink/95 p-4 md:p-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

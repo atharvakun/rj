@@ -82,7 +82,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
     <section
       ref={root}
       id="top"
-      className="relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-ink text-bone"
+      className="theme-dark relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-ink text-bone"
       aria-label="Introduction"
     >
       {/* Media */}

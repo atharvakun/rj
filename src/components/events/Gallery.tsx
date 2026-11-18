@@ -108,7 +108,7 @@ export function Gallery({ images, title }: { images: ImageAsset[]; title: string
             aria-modal="true"
             aria-label={`${title} gallery`}
             data-lenis-prevent
-            className="fixed inset-0 z-[85] flex flex-col bg-ink/95 text-bone backdrop-blur-sm"
+            className="theme-dark fixed inset-0 z-[85] flex flex-col bg-ink/95 text-bone backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

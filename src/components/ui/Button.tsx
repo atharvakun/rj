@@ -30,14 +30,14 @@ const base =
 const variants: Record<Variant, string> = {
   primary: "bg-bone text-ink hover:text-bone border border-bone",
   dark: "bg-ink text-bone hover:text-bone border border-ink",
-  ember: "bg-ember text-ink hover:text-bone border border-ember",
+  ember: "bg-ember text-night hover:text-day border border-ember",
   outline: "bg-transparent text-current border border-current/40 hover:border-current",
 };
 
 const fills: Record<Variant, string> = {
   primary: "bg-ember",
   dark: "bg-ember",
-  ember: "bg-ink",
+  ember: "bg-night",
   outline: "bg-current opacity-[0.08]",
 };
 

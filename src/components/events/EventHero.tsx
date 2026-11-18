@@ -43,7 +43,7 @@ export function EventHero({ event, upcoming }: { event: EventRecord; upcoming: b
   );
 
   return (
-    <section ref={root} className="relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden text-bone">
+    <section ref={root} className="theme-dark relative flex h-[100svh] min-h-[640px] flex-col justify-end overflow-hidden bg-ink text-bone">
       <div ref={media} className="absolute inset-0" style={{ clipPath: reduced ? undefined : "inset(0 0 100% 0)" }}>
         <div data-img className="absolute inset-0 will-change-transform">
           <Image

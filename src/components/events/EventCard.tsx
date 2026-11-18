@@ -51,8 +51,8 @@ export function EventCard({
         reveal={reveal}
         parallax={0.1}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
-        <div className="absolute inset-x-4 top-4 flex items-center justify-between text-bone">
+        <div className="theme-dark absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-40" />
+        <div className="theme-dark absolute inset-x-4 top-4 flex items-center justify-between text-bone">
           {typeof index === "number" ? (
             <span className="font-mono text-xs">{index.toString().padStart(2, "0")}</span>
           ) : (

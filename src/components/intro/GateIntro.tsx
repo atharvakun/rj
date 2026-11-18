@@ -130,7 +130,7 @@ export function GateIntro() {
   const gateBox: React.CSSProperties = { width: GATE_W, height: GATE_H, bottom: GATE_BOTTOM };
 
   return (
-    <div ref={root} className="fixed inset-0 z-[95] text-bone" role="presentation">
+    <div ref={root} className="theme-dark fixed inset-0 z-[95] text-bone" role="presentation">
       <div data-scene className="absolute inset-0 overflow-hidden will-change-transform">
         {/* Dusk sky */}
         <div

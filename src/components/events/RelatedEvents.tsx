@@ -47,9 +47,9 @@ export function RelatedEvents({
           className="group relative block overflow-hidden border-t border-smoke"
         >
           <RevealImage image={next.cover} sizes="100vw" className="h-[70vh] min-h-[28rem] w-full" parallax={0.3} reveal="none" hoverZoom>
-            <div className="absolute inset-0 bg-ink/55 transition-colors duration-700 group-hover:bg-ink/40" />
+            <div className="theme-dark absolute inset-0 bg-ink/55 transition-colors duration-700 group-hover:bg-ink/40" />
           </RevealImage>
-          <div className="container-x absolute inset-0 flex flex-col justify-between py-10 text-bone">
+          <div className="theme-dark container-x absolute inset-0 flex flex-col justify-between py-10 text-bone">
             <span className="eyebrow">Next event</span>
             <div className="flex items-end justify-between gap-6">
               <span className="font-display text-display-lg text-balance transition-transform duration-700 ease-out-expo group-hover:translate-x-3">

@@ -10,7 +10,7 @@ import { TransitionLink } from "@/components/ui/TransitionLink";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="sticky bottom-0 z-0 theme-stage">
+    <footer className="theme-dark theme-stage sticky bottom-0 z-0">
       <div className="container-x relative flex min-h-[70vh] flex-col justify-between overflow-hidden pb-6 pt-16 md:min-h-[80vh]">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">

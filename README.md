@@ -65,7 +65,7 @@ src/
 
 1. **Name & copy** — `src/content/site.ts`.
 2. **Logo** — set `site.logo.src` to an image, or edit the arch `Mark` in `src/components/ui/Logo.tsx` (`ArchDefs.tsx` holds the shared arch path).
-3. **Colours** — the `:root` tokens at the top of `src/app/globals.css` (`--color-ember` is the kesariya accent, `--color-gold` the metallic). The gate scene's sandstone palette is local to `GateIntro.tsx`.
+3. **Colours** — the `:root` tokens at the top of `src/app/globals.css`. The site is white-first: `ink` is "the surface" and `bone` "the type", so stage sections are white with charcoal text, `theme-paper` sections are warm ivory, and anything that must stay dark (gate intro, hero, image overlays, footer, menus) adds the `theme-dark` class, which swaps the same tokens to the cinematic dark palette. `--color-ember` is the kesariya accent, `--color-gold` the metallic; `night` / `day` never change. The gate scene's sandstone palette is local to `GateIntro.tsx`.
 4. **Type** — `src/styles/fonts.ts`.
 5. **Favicon** — `src/app/icon.svg`. Add `public/og.jpg` for social previews.
 

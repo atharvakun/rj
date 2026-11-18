@@ -89,8 +89,8 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
                 parallax={0.25}
                 reveal="up"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-                <div className="absolute left-5 top-5 flex items-baseline gap-2 text-bone">
+                <div className="theme-dark absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+                <div className="theme-dark absolute left-5 top-5 flex items-baseline gap-2 text-bone">
                   <span className="font-display text-5xl leading-none md:text-6xl">{start.day}</span>
                   <span className="eyebrow">
                     {start.month}

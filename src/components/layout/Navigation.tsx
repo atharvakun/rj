@@ -120,7 +120,7 @@ export function Navigation() {
     <>
       {/* The blend must live on the fixed element itself: a fixed header is an
           isolated group, so a blended descendant would only blend with the header. */}
-      <header ref={header} className={cn("fixed inset-x-0 top-0 z-[70]", !condensed && "mix-blend-difference")}>
+      <header ref={header} className={cn("fixed inset-x-0 top-0 z-[70]", !condensed && "theme-dark mix-blend-difference")}>
         <div
           className={cn(
             "transition-[background-color,border-color,backdrop-filter] duration-500",
@@ -200,7 +200,7 @@ export function Navigation() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="fixed inset-0 z-[65] flex flex-col bg-ink text-bone"
+            className="theme-dark fixed inset-0 z-[65] flex flex-col bg-ink text-bone"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}

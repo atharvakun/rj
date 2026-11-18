@@ -106,7 +106,7 @@ export function CustomCursor() {
       <div
         ref={dot}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-bone opacity-0 mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-day opacity-0 mix-blend-difference"
       />
       <div
         ref={ring}
@@ -115,7 +115,7 @@ export function CustomCursor() {
         style={{ mixBlendMode: state === "label" ? "normal" : "difference" }}
       >
         <span
-          className={`eyebrow whitespace-nowrap text-center text-[0.6rem] text-ink transition-opacity duration-300 ${
+          className={`eyebrow whitespace-nowrap text-center text-[0.6rem] text-night transition-opacity duration-300 ${
             state === "label" ? "opacity-100 delay-150" : "opacity-0"
           }`}
         >

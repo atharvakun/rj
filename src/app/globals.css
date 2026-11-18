@@ -2,23 +2,29 @@
 
 /* ------------------------------------------------------------------------
    DESIGN TOKENS
-   Direction: "Cinematic Editorial" — a warm near-black stage, bone-coloured
-   editorial interludes, one hot accent (ember, a kesariya saffron) and one
-   quiet metallic (gold).
-   Change these to rebrand; components only reference the token names.
+   Direction: "Editorial, white-first" — white and warm-ivory surfaces,
+   charcoal type, one hot accent (ember, a kesariya saffron) and one quiet
+   metallic (gold). Dark is reserved for the opening gate, the full-bleed
+   hero, image overlays and the footer, which opt in with `theme-dark`.
+
+   Token semantics are contextual: `ink` is always "the surface" and `bone`
+   "the type" on stage sections, so one component works in light and dark
+   contexts. `night` and `day` never change.
    ------------------------------------------------------------------------ */
 :root {
-  --color-ink: #0b0a09;        /* stage black (warm) */
-  --color-ink-2: #15120f;      /* raised surfaces on black */
-  --color-smoke: #2a2522;      /* borders / dividers on black */
-  --color-ash: #8f857a;        /* secondary text on black */
-  --color-bone: #f3ede3;       /* editorial paper */
-  --color-sand: #e5dccc;       /* raised surfaces on paper */
+  --color-ink: #ffffff;        /* stage surface */
+  --color-ink-2: #f3f0ea;      /* raised surfaces on the stage */
+  --color-smoke: #e3ddd3;      /* borders / dividers */
+  --color-ash: #7d756c;        /* secondary text */
+  --color-bone: #141210;       /* type on the stage */
+  --color-sand: #e8e1d4;       /* raised surfaces on paper */
   --color-clay: #6b625a;       /* secondary text on paper */
-  --color-ember: #ec8a2f;      /* accent: kesariya (saffron) */
-  --color-ember-deep: #c0631a;
-  --color-gold: #d4a24c;       /* quiet metallic accent */
-  --color-white: #fbf8f2;
+  --color-ember: #e37d22;      /* accent: kesariya (saffron) */
+  --color-ember-deep: #b85d14;
+  --color-gold: #b3863a;       /* quiet metallic accent */
+  --color-white: #ffffff;
+  --color-night: #0b0a09;      /* fixed: always dark */
+  --color-day: #fbf8f2;        /* fixed: always light */
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
@@ -27,6 +33,21 @@
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --nav-h: 5rem;
 
+  color-scheme: light;
+}
+
+/* Dark context: the original cinematic palette. Scope, not a surface. */
+.theme-dark {
+  --color-ink: #0b0a09;
+  --color-ink-2: #15120f;
+  --color-smoke: #2a2522;
+  --color-ash: #8f857a;
+  --color-bone: #f3ede3;
+  --color-sand: #e5dccc;
+  --color-clay: #6b625a;
+  --color-ember: #ec8a2f;
+  --color-ember-deep: #c0631a;
+  --color-gold: #d4a24c;
   color-scheme: dark;
 }
 
@@ -42,6 +63,8 @@
   --color-ember-deep: var(--color-ember-deep);
   --color-gold: var(--color-gold);
   --color-white: var(--color-white);
+  --color-night: var(--color-night);
+  --color-day: var(--color-day);
 
   --font-display: var(--font-display), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
@@ -108,7 +131,7 @@
   }
   ::selection {
     background: var(--color-ember);
-    color: var(--color-ink);
+    color: var(--color-night);
   }
   img,
   video {
@@ -154,15 +177,21 @@
 @utility container-x {
   padding-inline: var(--gutter);
 }
+/* Warm ivory interlude. Paper keeps the classic meaning: ink = type, bone = surface. */
 @utility theme-paper {
+  --color-ink: #141210;
+  --color-ink-2: #1f1b17;
+  --color-bone: #f5f1e9;
+  --color-smoke: #ddd6ca;
+  --color-ash: #7d756c;
   background: var(--color-bone);
   color: var(--color-ink);
   color-scheme: light;
 }
+/* Stage: white by default, dark when combined with theme-dark. */
 @utility theme-stage {
   background: var(--color-ink);
   color: var(--color-bone);
-  color-scheme: dark;
 }
 @utility mask-fade-x {
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
