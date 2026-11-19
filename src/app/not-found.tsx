@@ -10,7 +10,7 @@ export default function NotFound() {
       </h1>
       <p className="mt-6 max-w-md text-bone/70">The link may be old, or the event may have moved. The archive has everything we have made.</p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Button href="/#events">See upcoming events</Button>
+        <Button href="/events">See upcoming events</Button>
         <Button href="/" variant="outline">
           Home
         </Button>

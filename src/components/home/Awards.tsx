@@ -1,23 +1,23 @@
 import { awards } from "@/content";
 import { site } from "@/content/site";
-import { pad2 } from "@/lib/utils";
+import { cn, pad2 } from "@/lib/utils";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Stagger } from "@/components/motion/Stagger";
 import { Mark } from "@/components/ui/Logo";
 
-/** The Puraskar: categories, who can be nominated, how it works. */
-export function Awards() {
+/** The Puraskar: categories, who can be nominated, how it works. `standalone` renders it as a page. */
+export function Awards({ standalone = false }: { standalone?: boolean }) {
   return (
-    <section id="awards" className="theme-paper relative scroll-mt-16 border-t border-ink/10">
-      <div className="container-x pb-28 pt-24 md:pb-40 md:pt-32">
+    <section id="awards" className={cn("theme-paper relative", !standalone && "border-t border-ink/10")}>
+      <div className={cn("container-x pb-28 md:pb-40", standalone ? "pt-32 md:pt-44" : "pt-24 md:pt-32")}>
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* Sticky intro */}
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <Eyebrow className="text-clay">{awards.eyebrow}</Eyebrow>
-              <TextReveal as="h2" className="mt-8 font-display text-display-lg text-balance" split="words">
+              <TextReveal as={standalone ? "h1" : "h2"} className="mt-8 font-display text-display-lg text-balance" split="words">
                 {awards.title}
               </TextReveal>
               <TextReveal as="p" className="mt-8 max-w-md text-pretty text-lead text-ink/75" delay={0.15}>

@@ -14,20 +14,17 @@ import { useIntro } from "./IntroProvider";
 import { useLenis } from "./SmoothScroll";
 
 const overlayEase = [0.76, 0, 0.24, 1] as const;
-const NOMINATE = { label: "Nominate", href: "/?purpose=nomination#contact" };
-
-const sectionOf = (href: string) => (href.includes("#") ? href.split("#")[1] : null);
+const NOMINATE = { label: "Nominate", href: "/contact?purpose=nomination" };
 
 /**
  * Persistent top menu. Transparent over the opening of a page, condensing
- * onto a translucent bar once scrolled. On the home page the links are
- * section anchors and the current section is underlined.
+ * onto a translucent bar once scrolled. The current page is underlined.
  */
 export function Navigation() {
-  const pathname = usePathname();
+  // Normalise the trailing slash the static export adds, so "/events/" is the list and "/events/x/" a detail page.
+  const pathname = (usePathname() ?? "/").replace(/\/$/, "") || "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
   const header = useRef<HTMLElement>(null);
   const { ready } = useIntro();
   const lenis = useLenis();
@@ -55,34 +52,6 @@ export function Navigation() {
     { scope: header, dependencies: [ready], revertOnUpdate: true },
   );
 
-  // Section spy on the home page.
-  useEffect(() => {
-    if (pathname !== "/") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveSection(null);
-      return;
-    }
-    const ids = site.nav.map((n) => sectionOf(n.href)).filter((id): id is string => Boolean(id));
-    const onScroll = () => {
-      const line = window.scrollY + window.innerHeight * 0.4;
-      let current: string | null = null;
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
-        if (top <= line) current = id;
-      }
-      setActiveSection(current);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [pathname]);
-
   // Close on route change, lock scroll while open.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -108,14 +77,13 @@ export function Navigation() {
   }, []);
 
   const isActive = (href: string) => {
-    const section = sectionOf(href);
-    if (section) return pathname === "/" && activeSection === section;
-    if (href === "/") return pathname === "/" && activeSection === null;
-    return pathname === href || pathname.startsWith(href + "/");
+    const path = href.split("?")[0];
+    if (path === "/") return pathname === "/";
+    return pathname === path || pathname.startsWith(path + "/");
   };
   const condensed = scrolled && !open;
   // Pages that open on a full-bleed dark hero get light nav text until the bar condenses.
-  const darkOpening = pathname === "/" || pathname.startsWith("/events/");
+  const darkOpening = pathname === "/" || /^\/events\/[^/]+$/.test(pathname);
   const menuItems = [{ label: "Home", href: "/" }, ...site.nav];
 
   return (

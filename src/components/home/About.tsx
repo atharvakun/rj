@@ -13,9 +13,11 @@ import { RevealImage } from "@/components/motion/RevealImage";
 import { Stagger } from "@/components/motion/Stagger";
 import { Parallax } from "@/components/motion/Parallax";
 import { archClip } from "@/components/ui/ArchDefs";
-import { pad2 } from "@/lib/utils";
+import { cn, pad2 } from "@/lib/utils";
 
-export function About() {
+/** The Samiti: manifesto, story, values and team. `standalone` renders it as a page (h1, room for the nav). */
+export function About({ standalone = false }: { standalone?: boolean }) {
+  const Manifesto = standalone ? "h1" : "p";
   const root = useRef<HTMLElement>(null);
   const manifesto = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -25,6 +27,11 @@ export function About() {
       const m = manifesto.current;
       if (!m || reduced) return;
       const words = m.querySelectorAll("[data-word]");
+      if (standalone) {
+        // At the top of its own page there is nothing to scrub against: play the emphasis on load.
+        gsap.fromTo(words, { opacity: 0.15 }, { opacity: 1, stagger: 0.035, duration: 0.7, ease: "power2.out", delay: 0.4 });
+        return;
+      }
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         gsap.fromTo(
@@ -52,21 +59,21 @@ export function About() {
       });
       return () => mm.revert();
     },
-    { scope: root, dependencies: [reduced], revertOnUpdate: true },
+    { scope: root, dependencies: [reduced, standalone], revertOnUpdate: true },
   );
 
   return (
     <section ref={root} id="about" className="theme-paper relative scroll-mt-16">
       {/* Manifesto */}
-      <div ref={manifesto} className="container-x flex min-h-[70vh] flex-col justify-center py-24 lg:min-h-[85vh]">
+      <div ref={manifesto} className={cn("container-x flex min-h-[70vh] flex-col justify-center py-24 lg:min-h-[85vh]", standalone && "pt-nav")}>
         <Eyebrow className="text-clay">{home.about.eyebrow}</Eyebrow>
-        <p className="mt-8 max-w-5xl font-display text-[clamp(1.9rem,4.6vw,4.6rem)] leading-[1.08] tracking-[-0.02em] text-balance">
+        <Manifesto className="mt-8 max-w-5xl font-display text-[clamp(1.9rem,4.6vw,4.6rem)] leading-[1.08] tracking-[-0.02em] text-balance">
           {about.manifesto.split(" ").map((w, i) => (
             <span key={i} data-word className="mr-[0.26em] inline-block">
               {w}
             </span>
           ))}
-        </p>
+        </Manifesto>
       </div>
 
       {/* Story grid */}

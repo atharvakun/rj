@@ -1,6 +1,6 @@
-# Rajasthan Bhushan Puraskar Samiti — website
+| Routes | Curtain wipe (`TransitionProvider`) + per-route entrance (`template.tsx`); in-page anchors scroll smoothly |# Rajasthan Bhushan Puraskar Samiti — website
 
-A single-page site for the Rajasthan Bhushan Puraskar Samiti, Pune: a committee of people of Rajasthani origin settled in Maharashtra, which confers the Rajasthan Bhushan Puraskar on members who have achieved distinction in their fields and gathers the community through the year. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis, exported statically to GitHub Pages.
+A website for the Rajasthan Bhushan Puraskar Samiti, Pune: a committee of people of Rajasthani origin settled in Maharashtra, which confers the Rajasthan Bhushan Puraskar on members who have achieved distinction in their fields and gathers the community through the year. Built with Next.js (App Router), TypeScript, Tailwind CSS v4, GSAP + ScrollTrigger + SplitText, Framer Motion and Lenis, exported statically to GitHub Pages.
 
 > **Placeholder content.** The organisation name, taglines and medallion logo are the client's (taken from the 2026 award invitation). Everything else (events, dates, venues, team roles, award categories, contact details, photographs) is placeholder copy written from the brief and must be confirmed or replaced by the Samiti before launch. No real person is named as a team member or award recipient anywhere on the site.
 
@@ -14,19 +14,23 @@ npm run build      # production build (static export to out/)
 
 Node 20+ recommended. Fonts load from Google Fonts at build time; temporary photography loads from Wikimedia Commons (credited on `/credits`, sourced in `src/content/photos.ts`).
 
-## The page
+## Pages
 
 ```
-/                 gate intro → hero → where we come from → about + team → upcoming events → the awards → contact
+/                 gate intro → hero → where we come from → four doors to the pages below
+/about            manifesto, story, values, team
+/events           next event in full (countdown, venue, register), rest of the calendar, past-events archive
 /events/[slug]    detail page per event (static params from content)
+/awards           the Rajasthan Bhushan Puraskar: categories, eligibility, process
+/contact          contact details + enquiry form
 /credits          photo credits, generated from photos.ts
 ```
 
-The navigation links are section anchors (`/#about`, `/#events`, `/#awards`, `/#contact`); the current section is underlined as you scroll. Event pages link back to the sections, and "Register interest" on an event page lands on the contact form with the message pre-filled.
+Each navigation tab is its own page; the current page is underlined. "Nominate" opens `/contact?purpose=nomination`, and "Register interest" on an event opens `/contact?event=<slug>` with the message pre-filled. The section components under `components/home/` take a `standalone` prop that renders them as a page (h1 heading, room for the nav).
 
 ### Opening sequence
 
-`src/components/intro/GateIntro.tsx`: a fort wall with a cusped gateway rises against the dusk, an elephant and a camel walk in to flank it, the doors swing open on the medallion and the greeting (पधारो म्हारे देस · Welcome to · Rajasthan Bhushan Puraskar Samiti), then the camera passes through the gate into the hero. It plays once per browser session, has a **Skip intro** button, and never plays for `prefers-reduced-motion` or for deep links to a section. The silhouettes are free Wikimedia Commons SVGs (CC0 / public domain, noted in `silhouettes.ts`).
+`src/components/intro/GateIntro.tsx`: a fort wall with a cusped gateway rises against the dusk, an elephant and a camel walk in to flank it, the doors swing open on the medallion and the greeting (पधारो म्हारे देस · Welcome to · Rajasthan Bhushan Puraskar Samiti), then the camera passes through the gate into the hero. It plays once per browser session, has a **Skip intro** button, and never plays for `prefers-reduced-motion`, for deep links to a section, or on inner pages. The silhouettes are free Wikimedia Commons SVGs (CC0 / public domain, noted in `silhouettes.ts`).
 
 ## Where things live
 
@@ -34,7 +38,7 @@ The navigation links are section anchors (`/#about`, `/#events`, `/#awards`, `/#
 src/
   content/            ← everything editable, no presentation code
     site.ts           name, greeting, contact, socials, nav
-    home.ts           hero, photo strip, section copy, contact purposes
+    home.ts           hero, photo strip, directory, page titles, section copy, contact purposes
     about.ts          manifesto, story blocks, values, team roles
     awards.ts         award categories, eligibility, process
     events.ts         upcoming + past events (dates, venue, gallery)
@@ -48,7 +52,7 @@ src/
     layout/           navigation (section spy), footer, smooth scroll, page transitions, cursor
     motion/           TextReveal, RevealImage, Parallax, Stagger
     ui/               Button, Magnetic, Logo, Eyebrow, Marquee, TransitionLink, ArchDefs (the arch clip path)
-    home/             Hero, PhotoStrip, About (with team), UpcomingEvent, Awards, Contact, EnquiryForm
+    home/             Hero, PhotoStrip, Directory, About (with team), UpcomingEvent, Awards, Contact, EnquiryForm
     events/           EventHero, Gallery (+ lightbox), VideoHighlights, Countdown, EventCard…
   .github/workflows/deploy.yml  static export → GitHub Pages
 ```
@@ -84,7 +88,7 @@ The form validates client-side, ignores honeypot submissions and then either:
 1. POSTs JSON to `NEXT_PUBLIC_ENQUIRY_ENDPOINT` if it is set at build time (Formspree, Basin, Getform, a webhook…). On GitHub Actions, set a repository variable named `ENQUIRY_ENDPOINT`.
 2. Otherwise opens the visitor's email app with the message drafted to `site.contact.email`.
 
-`?purpose=nomination#contact` pre-selects "Nominate someone" and drops in a nomination template; `?event=<slug>#contact` pre-fills an attendance request. See `.env.example`.
+`/contact?purpose=nomination` pre-selects "Nominate someone" and drops in a nomination template; `/contact?event=<slug>` pre-fills an attendance request. See `.env.example`.
 
 ## Motion system
 

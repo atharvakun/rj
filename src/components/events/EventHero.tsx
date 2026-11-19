@@ -61,7 +61,7 @@ export function EventHero({ event, upcoming }: { event: EventRecord; upcoming: b
       </div>
 
       <div className="container-x absolute inset-x-0 top-nav z-10 flex items-center justify-between pt-6">
-        <TransitionLink href="/#events" data-fade className="group inline-flex items-center gap-2 text-sm opacity-0">
+        <TransitionLink href="/events" data-fade className="group inline-flex items-center gap-2 text-sm opacity-0">
           <ArrowLeft className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:-translate-x-1" strokeWidth={1.75} />
           <span className="link-line">All events</span>
         </TransitionLink>

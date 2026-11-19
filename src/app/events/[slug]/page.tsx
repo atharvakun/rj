@@ -154,7 +154,7 @@ export default async function EventPage({ params }: { params: Params }) {
                   <Button href={registrationHref(event)} size="lg" variant="ember">
                     {event.registrationUrl ? "Register" : "Register interest"}
                   </Button>
-                  <Button href="/#contact" variant="outline" size="lg">
+                  <Button href="/contact" variant="outline" size="lg">
                     Ask a question
                   </Button>
                 </Stagger>

@@ -130,7 +130,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
         </p>
         {next && nextParts && (
           <TransitionLink
-            href="/#events"
+            href="/events"
             data-hero="fade"
             className="group flex items-center gap-4 opacity-0"
           >
@@ -177,7 +177,7 @@ export function Hero({ next }: { next: EventRecord | null }) {
             </div>
             {next && daysToNext !== null && (
               <p data-hero="fade" className="mt-5 text-sm text-bone/70 opacity-0 lg:hidden">
-                <TransitionLink href="/#events" className="link-line">
+                <TransitionLink href="/events" className="link-line">
                   Next event in {daysToNext} days
                 </TransitionLink>
               </p>

@@ -89,5 +89,5 @@ export const awards = {
     note: "The first honourees will be announced after the first Puraskar evening and listed here with their permission.",
   },
 
-  cta: { label: "Nominate someone", href: "/?purpose=nomination#contact" },
+  cta: { label: "Nominate someone", href: "/contact?purpose=nomination" },
 } as const;

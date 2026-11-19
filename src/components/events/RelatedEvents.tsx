@@ -24,7 +24,7 @@ export function RelatedEvents({
                 More like this
               </TextReveal>
             </div>
-            <TransitionLink href="/#events" className="group hidden items-center gap-2 text-sm md:inline-flex">
+            <TransitionLink href="/events" className="group hidden items-center gap-2 text-sm md:inline-flex">
               <span className="link-line">All events</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-500 ease-out-expo group-hover:translate-x-1" strokeWidth={1.75} />
             </TransitionLink>

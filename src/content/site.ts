@@ -71,12 +71,12 @@ export const site = {
     { label: "YouTube", href: "https://youtube.com", handle: "Rajasthan Bhushan Puraskar Samiti" },
   ] satisfies SocialLink[],
 
-  /** Single-page navigation: every item is a section of the home page. */
+  /** Primary navigation: one page per item. */
   nav: [
-    { label: "About", href: "/#about" },
-    { label: "Events", href: "/#events" },
-    { label: "Awards", href: "/#awards" },
-    { label: "Contact", href: "/#contact" },
+    { label: "About", href: "/about" },
+    { label: "Events", href: "/events" },
+    { label: "Awards", href: "/awards" },
+    { label: "Contact", href: "/contact" },
   ] satisfies NavLink[],
 
   /** Footer legal line. */

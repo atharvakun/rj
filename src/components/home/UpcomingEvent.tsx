@@ -13,14 +13,23 @@ import { TransitionLink } from "@/components/ui/TransitionLink";
 import { Countdown } from "@/components/events/Countdown";
 
 export function registrationHref(event: EventRecord) {
-  return event.registrationUrl ?? `/?event=${encodeURIComponent(event.slug)}#contact`;
+  return event.registrationUrl ?? `/contact?event=${encodeURIComponent(event.slug)}`;
 }
 
-export function UpcomingEvent({ events, fallback, className }: { events: EventRecord[]; fallback: EventRecord | null; className?: string }) {
+type Props = {
+  events: EventRecord[];
+  fallback: EventRecord | null;
+  className?: string;
+  /** Render as a page: h1 heading and room for the nav. */
+  standalone?: boolean;
+};
+
+export function UpcomingEvent({ events, fallback, className, standalone = false }: Props) {
   const next = events[0];
+  const padding = className ?? (standalone ? "pt-32 md:pt-44" : "pt-24 md:pt-32");
 
   if (!next) {
-    return <ComingSoon fallback={fallback} className={className} />;
+    return <ComingSoon fallback={fallback} className={padding} standalone={standalone} />;
   }
 
   const start = formatDateParts(next.startsAt, next.timeZone);
@@ -28,7 +37,7 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
 
   return (
     <section id="events" className="relative theme-stage scroll-mt-16">
-      <div className={cn("container-x pb-28 md:pb-40", className ?? "pt-24 md:pt-32")}>
+      <div className={cn("container-x pb-28 md:pb-40", padding)}>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Copy */}
           <div className="order-2 flex flex-col lg:order-1 lg:col-span-7">
@@ -39,7 +48,7 @@ export function UpcomingEvent({ events, fallback, className }: { events: EventRe
               <span className="eyebrow text-ash">{categoryLabels[next.category]}</span>
             </div>
 
-            <TextReveal as="h2" className="mt-8 font-display text-display-lg text-balance" split="lines">
+            <TextReveal as={standalone ? "h1" : "h2"} className="mt-8 font-display text-display-lg text-balance" split="lines">
               {next.title}
             </TextReveal>
             {next.strapline && (
@@ -174,21 +183,21 @@ function Meta({ icon, label, children }: { icon?: React.ReactNode; label: string
   );
 }
 
-function ComingSoon({ fallback, className }: { fallback: EventRecord | null; className?: string }) {
+function ComingSoon({ fallback, className, standalone }: { fallback: EventRecord | null; className: string; standalone: boolean }) {
   return (
-    <section id="events" className="relative theme-stage scroll-mt-16">
-      <div className={cn("container-x pb-28 md:pb-40", className ?? "pt-24 md:pt-32")}>
+    <section id="events" className="relative theme-stage">
+      <div className={cn("container-x pb-28 md:pb-40", className)}>
         <Eyebrow>{home.events.eyebrow}</Eyebrow>
         <div className="mt-8 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <TextReveal as="h2" className="font-display text-display-lg text-balance">
+            <TextReveal as={standalone ? "h1" : "h2"} className="font-display text-display-lg text-balance">
               {home.events.comingSoonTitle}
             </TextReveal>
             <TextReveal as="p" className="mt-6 max-w-xl text-lead text-bone/80" delay={0.15}>
               {home.events.comingSoonBody}
             </TextReveal>
             <Stagger className="mt-10 flex gap-4">
-              <Button href="/#contact" size="lg" variant="ember">
+              <Button href="/contact" size="lg" variant="ember">
                 Keep me posted
               </Button>
             </Stagger>

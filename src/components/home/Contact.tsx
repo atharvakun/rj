@@ -6,14 +6,16 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { Stagger } from "@/components/motion/Stagger";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { cn } from "@/lib/utils";
 import { EnquiryForm } from "./EnquiryForm";
 
-export function Contact() {
+/** Contact details and the enquiry form. `standalone` renders it as a page. */
+export function Contact({ standalone = false }: { standalone?: boolean }) {
   return (
-    <section id="contact" className="theme-stage relative scroll-mt-16 border-t border-smoke">
-      <div className="container-x pb-28 pt-28 md:pb-40 md:pt-40">
+    <section id="contact" className={cn("theme-stage relative", !standalone && "border-t border-smoke")}>
+      <div className={cn("container-x pb-28 md:pb-40", standalone ? "pt-32 md:pt-44" : "pt-28 md:pt-40")}>
         <Eyebrow>{home.contact.eyebrow}</Eyebrow>
-        <TextReveal as="h2" className="mt-8 max-w-6xl font-display text-display-lg text-balance lg:text-display-xl" split="words">
+        <TextReveal as={standalone ? "h1" : "h2"} className="mt-8 max-w-6xl font-display text-display-lg text-balance lg:text-display-xl" split="words">
           {home.contact.title}
         </TextReveal>
 
